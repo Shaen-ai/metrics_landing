@@ -1,0 +1,50 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/cn";
+
+interface AccordionItemProps {
+  question: string;
+  answer: string;
+  defaultOpen?: boolean;
+}
+
+export function AccordionItem({ question, answer, defaultOpen = false }: AccordionItemProps) {
+  const [open, setOpen] = useState(defaultOpen);
+
+  return (
+    <div className="border-b border-zinc-200/60 dark:border-zinc-800/60">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center justify-between gap-4 py-5 text-left"
+      >
+        <span className="text-base font-medium text-zinc-900 dark:text-zinc-100">{question}</span>
+        <ChevronDown
+          size={18}
+          className={cn(
+            "shrink-0 text-zinc-400 transition-transform duration-200 dark:text-zinc-500",
+            open && "rotate-180",
+          )}
+        />
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <p className="pb-5 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+              {answer}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
