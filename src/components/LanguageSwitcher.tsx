@@ -40,7 +40,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-50 mt-2 min-w-[140px] overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
+        <div className="absolute right-0 top-full z-50 mt-2 min-w-[140px] overflow-hidden rounded-xl border border-border bg-card shadow-lg dark:bg-card">
           {languages.map((l) => (
             <button
               key={l.code}
@@ -52,8 +52,8 @@ export function LanguageSwitcher({ className }: { className?: string }) {
               className={cn(
                 "flex w-full items-center gap-2.5 px-3.5 py-2.5 text-sm transition-colors cursor-pointer",
                 l.code === lang
-                  ? "bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400"
-                  : "text-zinc-600 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-zinc-800",
+                  ? "bg-primary-muted text-primary dark:bg-primary-muted-strong"
+                  : "text-secondary-foreground/80 hover:bg-muted dark:text-muted-foreground dark:hover:bg-muted",
               )}
             >
               <span>{l.flag}</span>

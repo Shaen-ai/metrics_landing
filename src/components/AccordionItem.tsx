@@ -15,13 +15,13 @@ export function AccordionItem({ question, answer, defaultOpen = false }: Accordi
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <div className="border-b border-zinc-200/60 dark:border-zinc-800/60">
+    <div className="border-b border-border/70 dark:border-border/60">
       <button
         type="button"
         onClick={() => setOpen(!open)}
         className="flex w-full items-center justify-between gap-4 py-5 text-left"
       >
-        <span className="text-base font-medium text-zinc-900 dark:text-zinc-100">{question}</span>
+        <span className="text-base font-medium text-foreground">{question}</span>
         <ChevronDown
           size={18}
           className={cn(
@@ -39,7 +39,7 @@ export function AccordionItem({ question, answer, defaultOpen = false }: Accordi
             transition={{ duration: 0.25, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <p className="pb-5 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+            <p className="pb-5 text-sm leading-relaxed text-muted-foreground">
               {answer}
             </p>
           </motion.div>

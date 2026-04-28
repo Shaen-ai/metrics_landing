@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body
         suppressHydrationWarning
-        className={`${inter.variable} font-sans antialiased bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 transition-colors duration-300`}
+        className={`${inter.variable} font-sans antialiased bg-background text-foreground transition-colors duration-300`}
       >
         <ThemeProvider>
           <Navbar />

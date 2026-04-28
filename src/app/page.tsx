@@ -46,10 +46,10 @@ export default function HomePage() {
       {/* Features */}
       <SectionWrapper id="features">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             {t("features.title")}
           </h2>
-          <p className="mt-4 text-zinc-500 dark:text-zinc-400">
+          <p className="mt-4 text-muted-foreground">
             {t("features.subtitle")}
           </p>
         </div>
@@ -68,12 +68,12 @@ export default function HomePage() {
       </SectionWrapper>
 
       {/* How it works */}
-      <SectionWrapper className="border-t border-zinc-200/40 dark:border-zinc-800/40">
+      <SectionWrapper className="border-t border-border/50 dark:border-border/40">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             {t("howItWorks.title")}
           </h2>
-          <p className="mt-4 text-zinc-500 dark:text-zinc-400">
+          <p className="mt-4 text-muted-foreground">
             {t("howItWorks.subtitle")}
           </p>
         </div>
@@ -88,30 +88,30 @@ export default function HomePage() {
               transition={{ delay: i * 0.15, duration: 0.5 }}
               className="text-center"
             >
-              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 text-blue-500 dark:text-blue-400">
+              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-muted text-primary">
                 <s.icon size={26} />
               </div>
-              <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-blue-500 dark:text-blue-400">
+              <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-primary">
                 {t("howItWorks.step")} {i + 1}
               </div>
-              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{t(s.titleKey)}</h3>
-              <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{t(s.descKey)}</p>
+              <h3 className="text-lg font-semibold text-foreground">{t(s.titleKey)}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">{t(s.descKey)}</p>
             </motion.div>
           ))}
         </div>
       </SectionWrapper>
 
       {/* Social proof */}
-      <SectionWrapper className="border-t border-zinc-200/40 dark:border-zinc-800/40">
+      <SectionWrapper className="border-t border-border/50 dark:border-border/40">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-medium uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
             {t("socialProof.title")}
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
             {Array.from({ length: 5 }).map((_, i) => (
               <div
                 key={i}
-                className="h-8 w-24 rounded bg-zinc-100 dark:bg-zinc-800/50"
+                className="h-8 w-24 rounded bg-muted dark:bg-muted/50"
                 title="Logo placeholder"
               />
             ))}
@@ -121,11 +121,11 @@ export default function HomePage() {
 
       {/* CTA Banner */}
       <SectionWrapper>
-        <div className="relative overflow-hidden rounded-3xl border border-zinc-200 bg-gradient-to-br from-blue-50 via-indigo-50/50 to-white p-12 text-center shadow-xl dark:border-zinc-800 dark:from-blue-600/10 dark:via-indigo-600/5 dark:to-zinc-900 sm:p-16">
-          <h2 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-4xl">
+        <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-secondary via-secondary/60 to-card p-12 text-center shadow-xl shadow-primary/10 dark:from-primary-muted dark:via-card dark:to-card sm:p-16">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             {t("cta.title")}
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-zinc-500 dark:text-zinc-400">
+          <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
             {t("cta.subtitle")}
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

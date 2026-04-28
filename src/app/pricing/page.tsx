@@ -21,10 +21,10 @@ export default function PricingPage() {
     <>
       {/* Hero */}
       <SectionWrapper className="pt-32 text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl">
+        <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           {t("pricing.title")}
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-zinc-500 dark:text-zinc-400">
+        <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
           {t("pricing.subtitle")}
         </p>
         <div className="mt-8">
@@ -48,25 +48,25 @@ export default function PricingPage() {
       </section>
 
       {/* Comparison table (desktop) */}
-      <SectionWrapper className="border-t border-zinc-200/40 dark:border-zinc-800/40">
-        <h2 className="mb-12 text-center text-2xl font-bold text-zinc-900 dark:text-zinc-100 sm:text-3xl">
+      <SectionWrapper className="border-t border-border/50 dark:border-border/40">
+        <h2 className="mb-12 text-center text-2xl font-bold text-foreground sm:text-3xl">
           {t("pricing.comparePlans")}
         </h2>
 
         <div className="hidden overflow-x-auto lg:block">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-zinc-200 dark:border-zinc-800">
-                <th className="pb-4 pr-6 font-medium text-zinc-400 dark:text-zinc-400">{t("pricing.feature")}</th>
+              <tr className="border-b border-border">
+                <th className="pb-4 pr-6 font-medium text-muted-foreground">{t("pricing.feature")}</th>
                 {tiers.map((tier) => (
                   <th
                     key={tier.id}
                     className={cn(
                       "pb-4 text-center font-semibold",
-                      tier.popular ? "text-blue-500 dark:text-blue-400" : "text-zinc-900 dark:text-zinc-100",
+                      tier.popular ? "text-primary" : "text-foreground",
                     )}
                   >
-                    {tp(tier.name)}
+                    {tier.name}
                   </th>
                 ))}
               </tr>
@@ -79,9 +79,9 @@ export default function PricingPage() {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: fi * 0.03 }}
-                  className="border-b border-zinc-100 dark:border-zinc-800/50"
+                  className="border-b border-border/60 dark:border-border/50"
                 >
-                  <td className="py-4 pr-6 text-zinc-600 dark:text-zinc-300">{tp(f.label)}</td>
+                  <td className="py-4 pr-6 text-secondary-foreground/90 dark:text-foreground/85">{tp(f.label)}</td>
                   {TIER_COLUMN_IDS.map((tid) => {
                       const val = f[tid];
                       return (
@@ -90,13 +90,13 @@ export default function PricingPage() {
                             val ? (
                               <Check
                                 size={16}
-                                className="mx-auto text-blue-500 dark:text-blue-400"
+                                className="mx-auto text-primary"
                               />
                             ) : (
                               <X size={16} className="mx-auto text-zinc-300 dark:text-zinc-700" />
                             )
                           ) : (
-                            <span className="text-zinc-700 dark:text-zinc-200">{tp(val)}</span>
+                            <span className="text-foreground/90">{tp(val)}</span>
                           )}
                         </td>
                       );
@@ -107,27 +107,27 @@ export default function PricingPage() {
           </table>
         </div>
 
-        <p className="mt-6 text-center text-sm text-zinc-400 dark:text-zinc-500 lg:hidden">
+        <p className="mt-6 text-center text-sm text-muted-foreground lg:hidden">
           {t("pricing.scrollHint")}
         </p>
       </SectionWrapper>
 
       {donateUrl ? (
-        <SectionWrapper className="border-t border-zinc-200/40 dark:border-zinc-800/40">
-          <div className="mx-auto max-w-xl rounded-2xl border border-dashed border-zinc-300 bg-zinc-50/80 p-8 text-center dark:border-zinc-700 dark:bg-zinc-900/40">
+        <SectionWrapper className="border-t border-border/50 dark:border-border/40">
+          <div className="mx-auto max-w-xl rounded-2xl border border-dashed border-border bg-secondary/60 p-8 text-center dark:bg-secondary/20">
             <Heart
-              className="mx-auto mb-4 text-rose-500 dark:text-rose-400"
+              className="mx-auto mb-4 text-primary"
               size={28}
               aria-hidden
             />
-            <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
+            <p className="text-sm font-medium text-foreground">
               {t("pricing.donateText")}
             </p>
             <Link
               href={donateUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center justify-center rounded-full bg-rose-500 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-rose-600"
+              className="mt-6 inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:brightness-110"
             >
               {t("pricing.donateButton")}
             </Link>

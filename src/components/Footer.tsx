@@ -21,7 +21,7 @@ export function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer className="border-t border-zinc-200/60 bg-white dark:border-zinc-800/60 dark:bg-zinc-950">
+    <footer className="border-t border-border/80 bg-card/60 dark:bg-card/40">
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
         <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between">
           <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
@@ -33,8 +33,8 @@ export function Footer() {
               className="h-8 w-8 rounded-lg object-contain"
             />
             <span aria-label="Tunzone" className="font-extrabold tracking-tight">
-              <span className="text-zinc-900 dark:text-zinc-100">Tun</span>
-              <span className="text-[#f26a21]">zone</span>
+              <span className="text-foreground">Tun</span>
+              <span className="text-primary">zone</span>
             </span>
           </Link>
 

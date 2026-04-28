@@ -25,7 +25,7 @@ export function Navbar() {
   const { t } = useTranslation();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-200/60 bg-white/80 backdrop-blur-xl dark:border-zinc-800/60 dark:bg-zinc-950/80">
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/85 backdrop-blur-xl dark:border-border/60">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-tight">
           <Image
@@ -37,8 +37,8 @@ export function Navbar() {
             className="h-10 w-10 rounded-xl object-contain"
           />
           <span aria-label="Tunzone" className="font-extrabold tracking-tight">
-            <span className="text-zinc-900 dark:text-zinc-100">Tun</span>
-            <span className="text-[#f26a21]">zone</span>
+            <span className="text-foreground">Tun</span>
+            <span className="text-primary">zone</span>
           </span>
         </Link>
 

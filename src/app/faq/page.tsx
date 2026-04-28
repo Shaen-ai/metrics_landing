@@ -20,10 +20,10 @@ export default function FAQPage() {
       <SectionWrapper className="pt-32">
         <div className="mx-auto max-w-3xl">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl">
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
               {t("faq.title")}
             </h1>
-            <p className="mt-4 text-zinc-500 dark:text-zinc-400">
+            <p className="mt-4 text-muted-foreground">
               {t("faq.subtitle")}
             </p>
           </div>
@@ -39,9 +39,9 @@ export default function FAQPage() {
             ))}
           </div>
 
-          <div className="mt-16 rounded-2xl border border-zinc-200 bg-zinc-50 p-8 text-center dark:border-zinc-800 dark:bg-zinc-900/40">
-            <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{t("faq.stillHave")}</h3>
-            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+          <div className="mt-16 rounded-2xl border border-border bg-secondary/70 p-8 text-center dark:bg-secondary/25">
+            <h3 className="text-lg font-semibold text-foreground">{t("faq.stillHave")}</h3>
+            <p className="mt-2 text-sm text-muted-foreground">
               {t("faq.stillHaveDesc")}
             </p>
             <div className="mt-6">

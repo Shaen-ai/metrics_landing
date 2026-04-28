@@ -1,3 +1,59 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
+
+/* Align with metrics_platform_published: warm cream + logo orange */
+:root {
+  --background: #fff8f0;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --primary: #e8772e;
+  --primary-foreground: #ffffff;
+  --primary-muted: rgba(232, 119, 46, 0.12);
+  --primary-muted-strong: rgba(232, 119, 46, 0.2);
+  --secondary: #fef3e7;
+  --secondary-foreground: #1a1a1a;
+  --muted: #fef3e7;
+  --muted-foreground: #6b7280;
+  --border: #f0e6d8;
+  --ring: #e8772e;
+  --gradient-to: #f26a21;
+}
+
+.dark {
+  --background: #0c0a09;
+  --foreground: #fafaf9;
+  --card: #1c1917;
+  --primary: #e8772e;
+  --primary-foreground: #ffffff;
+  --primary-muted: rgba(232, 119, 46, 0.15);
+  --primary-muted-strong: rgba(232, 119, 46, 0.22);
+  --secondary: #292524;
+  --secondary-foreground: #fafaf9;
+  --muted: #292524;
+  --muted-foreground: #a8a29e;
+  --border: #3f3a36;
+  --ring: #e8772e;
+  --gradient-to: #f26a21;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-muted: var(--primary-muted);
+  --color-primary-muted-strong: var(--primary-muted-strong);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
