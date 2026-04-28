@@ -8,9 +8,17 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 const inter = Inter({ variable: "--font-sans", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Mebel — 3D Furniture Platform",
+  title: "Tunzone — 3D Furniture Platform",
   description:
     "Transform product photos into 3D models, build immersive room planners, and sell modular furniture online.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -25,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body
+        suppressHydrationWarning
         className={`${inter.variable} font-sans antialiased bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 transition-colors duration-300`}
       >
         <ThemeProvider>

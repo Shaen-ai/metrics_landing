@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -7,6 +8,7 @@ import { Button } from "./Button";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTranslation } from "@/hooks/useTranslation";
+import { getAppBaseUrl, getStartedHref } from "@/lib/appUrl";
 import { cn } from "@/lib/cn";
 
 const linkKeys = [
@@ -16,7 +18,7 @@ const linkKeys = [
   { key: "nav.about", href: "/about" },
 ];
 
-const appBase = (process.env.NEXT_PUBLIC_APP_URL ?? "").replace(/\/$/, "");
+const appBase = getAppBaseUrl();
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -25,9 +27,18 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200/60 bg-white/80 backdrop-blur-xl dark:border-zinc-800/60 dark:bg-zinc-950/80">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <Link href="/" className="text-xl font-bold tracking-tight">
-          <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent dark:from-blue-400 dark:to-indigo-400">
-            Mebel
+        <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-tight">
+          <Image
+            src="/logo.png"
+            alt="Tunzone logo"
+            width={40}
+            height={40}
+            priority
+            className="h-10 w-10 rounded-xl object-contain"
+          />
+          <span aria-label="Tunzone" className="font-extrabold tracking-tight">
+            <span className="text-zinc-900 dark:text-zinc-100">Tun</span>
+            <span className="text-[#f26a21]">zone</span>
           </span>
         </Link>
 
@@ -52,7 +63,7 @@ export function Navbar() {
           ) : null}
           <LanguageSwitcher />
           <ThemeToggle />
-          <Button href="/pricing" className="ml-1">
+          <Button href={getStartedHref()} className="ml-1">
             {t("nav.getStarted")}
           </Button>
         </div>
@@ -98,7 +109,7 @@ export function Navbar() {
               {t("nav.signIn")}
             </a>
           ) : null}
-          <Button href="/pricing" className="w-full">
+          <Button href={getStartedHref()} className="w-full">
             {t("nav.getStarted")}
           </Button>
         </div>

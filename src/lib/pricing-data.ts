@@ -1,13 +1,19 @@
+import { CONTACT_SUPPORT_EMAIL } from "./contact";
+
+/** Column order for the pricing table and feature matrix (matches tier ids). */
+export const TIER_COLUMN_IDS = ["starter", "business", "business-pro", "enterprise"] as const;
+export type TierColumnId = (typeof TIER_COLUMN_IDS)[number];
+
 export interface PricingFeature {
   label: string;
   starter: string | boolean;
-  growth: string | boolean;
-  scale: string | boolean;
+  business: string | boolean;
+  "business-pro": string | boolean;
   enterprise: string | boolean;
 }
 
 export interface PricingTier {
-  id: string;
+  id: TierColumnId;
   name: string;
   monthlyPrice: number | null;
   annualPrice: number | null;
@@ -21,7 +27,7 @@ export interface PricingTier {
   };
 }
 
-/** Annual display = monthly × 11/12 (1 month free when billed yearly). Keep in sync with backend config/plans.php */
+/** Annual display = monthly × 11/12 (1 month free when billed yearly). Keep quotas in sync with backend config/plans.php */
 export const tiers: PricingTier[] = [
   {
     id: "starter",
@@ -34,8 +40,8 @@ export const tiers: PricingTier[] = [
     quotas: { imageTo3dMonth1: 100, imageTo3dOngoing: 25 },
   },
   {
-    id: "growth",
-    name: "Growth",
+    id: "business",
+    name: "Business",
     monthlyPrice: 119,
     annualPrice: 109,
     description: "For growing brands that need more models and team collaboration.",
@@ -45,8 +51,8 @@ export const tiers: PricingTier[] = [
     quotas: { imageTo3dMonth1: 200, imageTo3dOngoing: 55 },
   },
   {
-    id: "scale",
-    name: "Scale",
+    id: "business-pro",
+    name: "Business Pro",
     monthlyPrice: 219,
     annualPrice: 201,
     description: "For established businesses with large catalogs and advanced needs.",
@@ -61,7 +67,7 @@ export const tiers: PricingTier[] = [
     annualPrice: null,
     description: "Custom volume, integrations, SLA, and dedicated support for large organizations.",
     cta: "Contact Sales",
-    ctaHref: "/about",
+    ctaHref: `mailto:${CONTACT_SUPPORT_EMAIL}?subject=Enterprise%20plan%20inquiry`,
     quotas: { imageTo3dMonth1: null, imageTo3dOngoing: null },
   },
 ];
@@ -70,71 +76,71 @@ export const features: PricingFeature[] = [
   {
     label: "Image-to-3D (first month)",
     starter: "100",
-    growth: "200",
-    scale: "400",
+    business: "200",
+    "business-pro": "400",
     enterprise: "Custom",
   },
   {
     label: "Image-to-3D (ongoing / mo)",
     starter: "25",
-    growth: "55",
-    scale: "100",
+    business: "55",
+    "business-pro": "100",
     enterprise: "Custom",
   },
   {
     label: "Published storefronts",
     starter: "1",
-    growth: "1",
-    scale: "1",
+    business: "1",
+    "business-pro": "1",
     enterprise: "Unlimited",
   },
   {
     label: "Team seats",
     starter: "1",
-    growth: "2",
-    scale: "5",
+    business: "2",
+    "business-pro": "5",
     enterprise: "Unlimited",
   },
   {
     label: "AI Chat assistant",
     starter: "50 msgs/mo",
-    growth: "200 msgs/mo",
-    scale: "Unlimited",
+    business: "200 msgs/mo",
+    "business-pro": "Unlimited",
     enterprise: "Unlimited",
   },
   {
     label: "Room Photo Assist",
     starter: false,
-    growth: true,
-    scale: true,
+    business: true,
+    "business-pro": true,
     enterprise: true,
   },
   {
     label: "Priority processing",
     starter: false,
-    growth: false,
-    scale: true,
+    business: false,
+    "business-pro": true,
     enterprise: true,
   },
   {
     label: "Custom domain / white-label",
     starter: false,
-    growth: true,
-    scale: true,
+    business: true,
+    "business-pro": true,
     enterprise: true,
   },
   {
     label: "Support",
     starter: "Email (48h)",
-    growth: "Email (24h)",
-    scale: "Chat + Email",
+    business: "Email (24h)",
+    "business-pro": "Chat + Email",
     enterprise: "Dedicated CSM",
   },
   {
     label: "API access",
     starter: false,
-    growth: false,
-    scale: true,
+    business: false,
+    "business-pro": true,
     enterprise: true,
   },
 ];

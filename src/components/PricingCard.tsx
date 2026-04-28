@@ -5,7 +5,8 @@ import { Check, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { Button } from "./Button";
 import { useTranslation } from "@/hooks/useTranslation";
-import type { PricingTier, PricingFeature } from "@/lib/pricing-data";
+import type { PricingTier, PricingFeature, TierColumnId } from "@/lib/pricing-data";
+import { getTierCheckoutHref } from "@/lib/checkout-urls";
 
 interface PricingCardProps {
   tier: PricingTier;
@@ -16,12 +17,17 @@ interface PricingCardProps {
 
 export function PricingCard({ tier, features, annual, index }: PricingCardProps) {
   const price = annual ? tier.annualPrice : tier.monthlyPrice;
-  const tierId = tier.id as "starter" | "growth" | "scale" | "enterprise";
+  const tierId = tier.id as TierColumnId;
   const { t, tp } = useTranslation();
+  const checkoutHref = getTierCheckoutHref(tierId, annual);
+  const ctaHref =
+    tierId === "enterprise"
+      ? tier.ctaHref
+      : checkoutHref ?? tier.ctaHref;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
@@ -61,7 +67,7 @@ export function PricingCard({ tier, features, annual, index }: PricingCardProps)
 
       <Button
         variant={tier.popular ? "primary" : "secondary"}
-        href={tier.ctaHref}
+        href={ctaHref}
         className="mb-8 w-full"
       >
         {tp(tier.cta)}

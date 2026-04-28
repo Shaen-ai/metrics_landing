@@ -28,8 +28,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     );
 
     if (href) {
+      const external =
+        href.startsWith("http://") || href.startsWith("https://");
       return (
-        <a href={href} className={classes}>
+        <a
+          href={href}
+          className={classes}
+          {...(external
+            ? { target: "_blank", rel: "noopener noreferrer" }
+            : {})}
+        >
           {children}
         </a>
       );

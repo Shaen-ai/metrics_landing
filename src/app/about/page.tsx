@@ -5,6 +5,7 @@ import { Button } from "@/components/Button";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
+import { CONTACT_SUPPORT_EMAIL, mailtoSupportHref } from "@/lib/contact";
 import { useTranslation } from "@/hooks/useTranslation";
 
 export default function AboutPage() {
@@ -19,7 +20,7 @@ export default function AboutPage() {
     const email = data.get("email") as string;
     const message = data.get("message") as string;
 
-    window.location.href = `mailto:hello@mebel.io?subject=Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
+    window.location.href = `${mailtoSupportHref(`Contact from ${name}`)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
     setSubmitted(true);
   }
 
@@ -49,7 +50,7 @@ export default function AboutPage() {
           {values.map((item, i) => (
             <motion.div
               key={item.titleKey}
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
@@ -84,10 +85,10 @@ export default function AboutPage() {
                   <div>
                     <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{t("about.email")}</p>
                     <a
-                      href="mailto:hello@mebel.io"
+                      href={mailtoSupportHref()}
                       className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
                     >
-                      hello@mebel.io
+                      {CONTACT_SUPPORT_EMAIL}
                     </a>
                   </div>
                 </div>
@@ -105,7 +106,7 @@ export default function AboutPage() {
 
             {/* Form */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
+              initial={false}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}

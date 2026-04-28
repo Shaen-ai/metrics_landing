@@ -4,7 +4,7 @@ import { useState } from "react";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { PricingCard } from "@/components/PricingCard";
 import { PricingToggle } from "@/components/PricingToggle";
-import { tiers, features } from "@/lib/pricing-data";
+import { tiers, features, TIER_COLUMN_IDS } from "@/lib/pricing-data";
 import { Check, X, Heart } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -75,15 +75,14 @@ export default function PricingPage() {
               {features.map((f, fi) => (
                 <motion.tr
                   key={f.label}
-                  initial={{ opacity: 0 }}
+                  initial={false}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: fi * 0.03 }}
                   className="border-b border-zinc-100 dark:border-zinc-800/50"
                 >
                   <td className="py-4 pr-6 text-zinc-600 dark:text-zinc-300">{tp(f.label)}</td>
-                  {(["starter", "growth", "scale", "enterprise"] as const).map(
-                    (tid) => {
+                  {TIER_COLUMN_IDS.map((tid) => {
                       const val = f[tid];
                       return (
                         <td key={tid} className="py-4 text-center">
@@ -101,8 +100,7 @@ export default function PricingPage() {
                           )}
                         </td>
                       );
-                    },
-                  )}
+                  })}
                 </motion.tr>
               ))}
             </tbody>

@@ -4,6 +4,8 @@ import { HeroSection } from "@/components/HeroSection";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { FeatureCard } from "@/components/FeatureCard";
 import { Button } from "@/components/Button";
+import { mailtoSupportHref } from "@/lib/contact";
+import { getStartedHref } from "@/lib/appUrl";
 import { useTranslation } from "@/hooks/useTranslation";
 import { motion } from "framer-motion";
 import {
@@ -80,7 +82,7 @@ export default function HomePage() {
           {stepKeys.map((s, i) => (
             <motion.div
               key={s.titleKey}
-              initial={{ opacity: 0, y: 30 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.5 }}
@@ -127,11 +129,11 @@ export default function HomePage() {
             {t("cta.subtitle")}
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Button href="/pricing">
+            <Button href={getStartedHref()}>
               {t("cta.getStarted")}
               <ArrowRight size={16} />
             </Button>
-            <Button variant="secondary" href="/about">
+            <Button variant="secondary" href={mailtoSupportHref("Sales inquiry")}>
               {t("cta.contactSales")}
             </Button>
           </div>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "./Button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { getStartedHref } from "@/lib/appUrl";
 
 export function HeroSection() {
   const { t } = useTranslation();
@@ -18,13 +19,13 @@ export function HeroSection() {
 
       <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-32 lg:px-8 lg:pt-40">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mx-auto max-w-3xl text-center"
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={false}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.1, duration: 0.5 }}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-zinc-200/60 bg-zinc-50/80 px-4 py-1.5 text-sm text-zinc-500 dark:border-zinc-700/60 dark:bg-zinc-900/80 dark:text-zinc-400"
@@ -45,7 +46,7 @@ export function HeroSection() {
           </p>
 
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Button href="/pricing">
+            <Button href={getStartedHref()}>
               {t("hero.startTrial")}
               <ArrowRight size={16} />
             </Button>
@@ -57,7 +58,7 @@ export function HeroSection() {
 
         {/* Placeholder visual */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
           className="relative mx-auto mt-20 max-w-5xl"

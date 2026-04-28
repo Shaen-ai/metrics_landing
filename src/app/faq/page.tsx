@@ -3,6 +3,7 @@
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { AccordionItem } from "@/components/AccordionItem";
 import { Button } from "@/components/Button";
+import { mailtoSupportHref } from "@/lib/contact";
 import { ArrowRight } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -44,7 +45,7 @@ export default function FAQPage() {
               {t("faq.stillHaveDesc")}
             </p>
             <div className="mt-6">
-              <Button href="/about">
+              <Button href={mailtoSupportHref("Question from FAQ")}>
                 {t("faq.contactUs")}
                 <ArrowRight size={16} />
               </Button>
