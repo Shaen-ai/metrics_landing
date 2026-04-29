@@ -6,7 +6,7 @@ import { cn } from "@/lib/cn";
 import { Button } from "./Button";
 import { useTranslation } from "@/hooks/useTranslation";
 import type { PricingTier, PricingFeature, TierColumnId } from "@/lib/pricing-data";
-import { getTierCheckoutHref } from "@/lib/checkout-urls";
+import { getBillingStartHref } from "@/lib/checkout-urls";
 
 interface PricingCardProps {
   tier: PricingTier;
@@ -19,11 +19,11 @@ export function PricingCard({ tier, features, annual, index }: PricingCardProps)
   const price = annual ? tier.annualPrice : tier.monthlyPrice;
   const tierId = tier.id as TierColumnId;
   const { t, tp } = useTranslation();
-  const checkoutHref = getTierCheckoutHref(tierId, annual);
+  const billingHref = getBillingStartHref(tierId, annual);
   const ctaHref =
     tierId === "enterprise"
       ? tier.ctaHref
-      : checkoutHref ?? tier.ctaHref;
+      : billingHref ?? tier.ctaHref;
 
   return (
     <motion.div
@@ -71,7 +71,7 @@ export function PricingCard({ tier, features, annual, index }: PricingCardProps)
       <Button
         variant={tier.popular ? "primary" : "secondary"}
         href={ctaHref}
-        sameTab={Boolean(checkoutHref)}
+        sameTab={Boolean(billingHref)}
         className="mb-8 w-full"
       >
         {tp(tier.cta)}

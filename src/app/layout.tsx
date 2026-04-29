@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { TranslationProvider } from "@/components/TranslationProvider";
+import type { LanguageCode } from "@/lib/translations";
 
 const inter = Inter({ variable: "--font-sans", subsets: ["latin"], display: "swap" });
 
@@ -22,9 +25,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+function htmlLangFromCode(code: LanguageCode): string {
+  if (code === "hy") return "hy";
+  if (code === "ru") return "ru";
+  return "en";
+}
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const h = await headers();
+  const raw = h.get("x-tunzone-lang");
+  const initialLang: LanguageCode =
+    raw === "en" || raw === "ru" || raw === "hy" ? raw : "en";
+
   return (
-    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
+    <html lang={htmlLangFromCode(initialLang)} className="dark scroll-smooth" suppressHydrationWarning>
       <head>
         {/* Prevent flash of wrong theme */}
         <script
@@ -39,9 +53,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <GoogleAnalytics />
         <ThemeProvider>
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
+          <TranslationProvider initialLang={initialLang}>
+            <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+          </TranslationProvider>
         </ThemeProvider>
       </body>
     </html>

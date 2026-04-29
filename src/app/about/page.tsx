@@ -5,23 +5,57 @@ import { Button } from "@/components/Button";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
+import { getContactSubmitUrl } from "@/lib/api-url";
 import { CONTACT_SUPPORT_EMAIL, mailtoSupportHref } from "@/lib/contact";
 import { useTranslation } from "@/hooks/useTranslation";
 
 export default function AboutPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const { t } = useTranslation();
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    const name = data.get("name") as string;
-    const email = data.get("email") as string;
-    const message = data.get("message") as string;
+    const name = (data.get("name") as string)?.trim();
+    const email = (data.get("email") as string)?.trim();
+    const message = (data.get("message") as string)?.trim();
 
-    window.location.href = `${mailtoSupportHref(`Contact from ${name}`)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
-    setSubmitted(true);
+    setSubmitError(null);
+    setSubmitting(true);
+    try {
+      const res = await fetch(getContactSubmitUrl(), {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+      const payload = (await res.json().catch(() => ({}))) as {
+        message?: string;
+        errors?: Record<string, string[]>;
+      };
+      if (!res.ok) {
+        const fromValidation =
+          payload.errors &&
+          Object.values(payload.errors).flat().filter(Boolean)[0];
+        setSubmitError(
+          typeof fromValidation === "string"
+            ? fromValidation
+            : (payload.message ?? t("about.sendError")),
+        );
+        return;
+      }
+      setSubmitted(true);
+      form.reset();
+    } catch {
+      setSubmitError(t("about.sendError"));
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const values = [
@@ -175,8 +209,13 @@ export default function AboutPage() {
                       placeholder={t("about.messagePlaceholder")}
                     />
                   </div>
-                  <Button type="submit" className="w-full">
-                    {t("about.sendMessage")}
+                  {submitError ? (
+                    <p className="text-sm text-destructive" role="alert">
+                      {submitError}
+                    </p>
+                  ) : null}
+                  <Button type="submit" className="w-full" disabled={submitting}>
+                    {submitting ? t("about.sending") : t("about.sendMessage")}
                     <Send size={16} />
                   </Button>
                 </form>

@@ -7,9 +7,12 @@ import { mailtoSupportHref } from "@/lib/contact";
 import { ArrowRight } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
-const faqKeys = Array.from({ length: 12 }, (_, i) => ({
-  qKey: `faq.q${i + 1}`,
-  aKey: `faq.a${i + 1}`,
+/** FAQ entry 7 removed — skip index 7 when rendering. */
+const FAQ_INDICES = [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12] as const;
+
+const faqKeys = FAQ_INDICES.map((i) => ({
+  qKey: `faq.q${i}`,
+  aKey: `faq.a${i}`,
 }));
 
 export default function FAQPage() {

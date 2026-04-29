@@ -1,41 +1,10 @@
 import type { TierColumnId } from "./pricing-data";
-
-function env(key: string): string {
-  return process.env[key]?.trim() ?? "";
-}
+import { getAppBaseUrl } from "./appUrl";
 
 /**
- * Laravel billing redirect — GET creates Stripe Checkout and 302s to Stripe.
- *
- * Resolution order:
- * - NEXT_PUBLIC_BILLING_CHECKOUT_BASE_URL (full URL to GET .../api/billing/checkout)
- * - NEXT_PUBLIC_API_URL + `/billing/checkout`
- * - Development: localhost:8000
- * - Production build without env (e.g. CI omitting NEXT_PUBLIC_*): Tunzone canonical API —
- *   override via env for staging / white-label forks.
+ * Admin app `/billing/start` — authenticated checkout via Bearer + JSON (see metrics_platform).
  */
-const DEFAULT_PRODUCTION_CHECKOUT_BASE = "https://api.tunzone.com/api/billing/checkout";
-
-function billingCheckoutBase(): string {
-  const explicit = env("NEXT_PUBLIC_BILLING_CHECKOUT_BASE_URL").replace(/\/+$/, "");
-  if (explicit) {
-    return explicit;
-  }
-  const apiBase = env("NEXT_PUBLIC_API_URL").replace(/\/+$/, "");
-  if (apiBase) {
-    return `${apiBase}/billing/checkout`;
-  }
-  if (process.env.NODE_ENV === "development") {
-    return "http://localhost:8000/api/billing/checkout";
-  }
-
-  return DEFAULT_PRODUCTION_CHECKOUT_BASE;
-}
-
-/**
- * Build GET URL for Laravel billing redirect (Stripe Checkout). See {@link billingCheckoutBase}.
- */
-export function getTierCheckoutHref(
+export function getBillingStartHref(
   tierId: TierColumnId,
   annual: boolean,
 ): string | null {
@@ -43,7 +12,7 @@ export function getTierCheckoutHref(
     return null;
   }
 
-  const base = billingCheckoutBase();
+  const base = getAppBaseUrl();
   if (!base) {
     return null;
   }
@@ -54,5 +23,5 @@ export function getTierCheckoutHref(
     interval,
   });
 
-  return `${base}?${params.toString()}`;
+  return `${base}/billing/start?${params.toString()}`;
 }

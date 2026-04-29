@@ -1,6 +1,6 @@
 /**
  * Admin app (metrics platform) origin, no trailing slash.
- * Used for Sign in and Get started → /login.
+ * Used for Sign in and billing routes that leave the marketing site.
  *
  * NEXT_PUBLIC_APP_URL overrides everything (set for local dev, staging, or alternate hosts).
  * Production builds without env default to the live admin host so deploys don’t need extra config.
@@ -20,7 +20,11 @@ export function getAppLoginHref(): string {
   return base ? `${base}/login` : "";
 }
 
-/** Primary CTA: admin /login in production, else env login, else /pricing when no base (local). */
+/**
+ * Primary hero/nav CTAs (“Subscribe now — pay in 14 days”, “Get Started”): same-origin `/pricing`
+ * so users pick a plan first. Plan checkout uses `getBillingStartHref` → admin `/billing/start` →
+ * login if needed → Stripe with Bearer (`client_reference_id` = user id).
+ */
 export function getStartedHref(): string {
-  return getAppLoginHref() || "/pricing";
+  return "/pricing";
 }
