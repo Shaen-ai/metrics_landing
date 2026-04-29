@@ -88,20 +88,6 @@ export const features: PricingFeature[] = [
     enterprise: "Custom",
   },
   {
-    label: "Published storefronts",
-    starter: "1",
-    business: "1",
-    "business-pro": "1",
-    enterprise: "Unlimited",
-  },
-  {
-    label: "Team seats",
-    starter: "1",
-    business: "2",
-    "business-pro": "5",
-    enterprise: "Unlimited",
-  },
-  {
     label: "AI Chat assistant",
     starter: "50 msgs/mo",
     business: "200 msgs/mo",
@@ -135,12 +121,5 @@ export const features: PricingFeature[] = [
     business: "Email (24h)",
     "business-pro": "Chat + Email",
     enterprise: "Dedicated CSM",
-  },
-  {
-    label: "API access",
-    starter: false,
-    business: false,
-    "business-pro": true,
-    enterprise: true,
   },
 ];

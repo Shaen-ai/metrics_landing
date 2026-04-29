@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({ variable: "--font-sans", subsets: ["latin"], display: "swap" });
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         suppressHydrationWarning
         className={`${inter.variable} font-sans antialiased bg-background text-foreground transition-colors duration-300`}
       >
+        <GoogleAnalytics />
         <ThemeProvider>
           <Navbar />
           <main className="min-h-screen">{children}</main>

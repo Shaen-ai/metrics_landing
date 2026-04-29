@@ -34,6 +34,7 @@ export function Navbar() {
             width={40}
             height={40}
             priority
+            unoptimized
             className="h-10 w-10 rounded-xl object-contain"
           />
           <span aria-label="Tunzone" className="font-extrabold tracking-tight">

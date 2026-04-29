@@ -56,7 +56,10 @@ export function PricingCard({ tier, features, annual, index }: PricingCardProps)
             <span className="text-sm text-muted-foreground">{t("pricing.perMonth")}</span>
           </div>
         ) : (
-          <div className="text-4xl font-bold text-foreground">{t("pricing.custom")}</div>
+          <div
+            className="min-h-[2.75rem] text-4xl font-bold leading-none text-foreground"
+            aria-label={t("tier.contactSales")}
+          />
         )}
         {annual && price !== null && (
           <p className="mt-1 text-xs text-muted-foreground">
