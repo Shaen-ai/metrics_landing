@@ -116,6 +116,13 @@ export const features: PricingFeature[] = [
     enterprise: true,
   },
   {
+    label: "Customize brand to your needs",
+    starter: false,
+    business: false,
+    "business-pro": true,
+    enterprise: true,
+  },
+  {
     label: "Support",
     starter: "Email (48h)",
     business: "Email (24h)",

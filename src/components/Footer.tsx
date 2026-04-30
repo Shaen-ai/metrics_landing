@@ -5,7 +5,6 @@ import Link from "next/link";
 import { mailtoSupportHref } from "@/lib/contact";
 import { useTranslation } from "@/hooks/useTranslation";
 
-const donateUrl = process.env.NEXT_PUBLIC_DONATE_URL?.trim();
 const contactHref = mailtoSupportHref();
 
 const linkKeys = [
@@ -14,7 +13,6 @@ const linkKeys = [
   { key: "footer.faq", href: "/faq" },
   { key: "footer.about", href: "/about" },
   { key: "footer.contact", href: contactHref },
-  ...(donateUrl ? [{ key: "footer.donate", href: donateUrl, external: true as const }] : []),
 ];
 
 export function Footer() {
@@ -41,17 +39,7 @@ export function Footer() {
 
           <div className="flex items-center gap-6">
             {linkKeys.map((l) =>
-              "external" in l && l.external ? (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-zinc-400 transition-colors hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-300"
-                >
-                  {t(l.key)}
-                </a>
-              ) : l.href.startsWith("mailto:") ? (
+              l.href.startsWith("mailto:") ? (
                 <a
                   key={l.href}
                   href={l.href}

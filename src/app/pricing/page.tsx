@@ -5,13 +5,10 @@ import { SectionWrapper } from "@/components/SectionWrapper";
 import { PricingCard } from "@/components/PricingCard";
 import { PricingToggle } from "@/components/PricingToggle";
 import { tiers, features, TIER_COLUMN_IDS } from "@/lib/pricing-data";
-import { Check, X, Heart } from "lucide-react";
-import Link from "next/link";
+import { Check, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/cn";
 import { useTranslation } from "@/hooks/useTranslation";
-
-const donateUrl = process.env.NEXT_PUBLIC_DONATE_URL?.trim();
 
 export default function PricingPage() {
   const [annual, setAnnual] = useState(false);
@@ -111,29 +108,6 @@ export default function PricingPage() {
           {t("pricing.scrollHint")}
         </p>
       </SectionWrapper>
-
-      {donateUrl ? (
-        <SectionWrapper className="border-t border-border/50 dark:border-border/40">
-          <div className="mx-auto max-w-xl rounded-2xl border border-dashed border-border bg-secondary/60 p-8 text-center dark:bg-secondary/20">
-            <Heart
-              className="mx-auto mb-4 text-primary"
-              size={28}
-              aria-hidden
-            />
-            <p className="text-sm font-medium text-foreground">
-              {t("pricing.donateText")}
-            </p>
-            <Link
-              href={donateUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:brightness-110"
-            >
-              {t("pricing.donateButton")}
-            </Link>
-          </div>
-        </SectionWrapper>
-      ) : null}
     </>
   );
 }

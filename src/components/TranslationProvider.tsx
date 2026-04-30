@@ -34,11 +34,20 @@ function setLanguageCookie(code: LanguageCode) {
   document.cookie = `${COOKIE_NAME}=${code}; Path=/; Max-Age=${COOKIE_MAX_AGE}; SameSite=Lax`;
 }
 
+function normalizeStoredLanguage(value: string | null | undefined): LanguageCode | null {
+  if (value === "en" || value === "ru" || value === "hy") return value;
+  return null;
+}
+
+function readCookieLanguage(): LanguageCode | null {
+  if (typeof document === "undefined") return null;
+  const match = document.cookie.match(new RegExp(`(?:^|;\\s*)${COOKIE_NAME}=([^;]+)`));
+  return normalizeStoredLanguage(match?.[1]);
+}
+
 function readStoredLanguage(): LanguageCode | null {
   if (typeof window === "undefined") return null;
-  const stored = localStorage.getItem("tunzone-lang");
-  if (stored === "en" || stored === "ru" || stored === "hy") return stored;
-  return null;
+  return normalizeStoredLanguage(localStorage.getItem("tunzone-lang"));
 }
 
 export function TranslationProvider({
@@ -51,10 +60,13 @@ export function TranslationProvider({
   const [lang, setLang] = useState<LanguageCode>(initialLang);
 
   useLayoutEffect(() => {
-    const stored = readStoredLanguage();
-    if (stored !== null && stored !== initialLang) {
-      setLang(stored);
-      setLanguageCookie(stored);
+    const preferred = readCookieLanguage() ?? readStoredLanguage();
+    if (preferred !== null) {
+      setLangStorage(preferred);
+      setLanguageCookie(preferred);
+      if (preferred !== initialLang) {
+        setLang(preferred);
+      }
     }
   }, [initialLang]);
 
