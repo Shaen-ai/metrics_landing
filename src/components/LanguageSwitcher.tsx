@@ -30,7 +30,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
         onClick={() => setOpen(!open)}
         aria-label="Change language"
         className={cn(
-          "flex h-9 items-center gap-1.5 rounded-lg px-2 transition-colors cursor-pointer",
+          "flex h-10 items-center gap-1.5 rounded-lg px-2 transition-colors cursor-pointer sm:h-9",
           "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100",
           "hover:bg-zinc-100 dark:hover:bg-zinc-800",
         )}
@@ -40,7 +40,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-50 mt-2 min-w-[140px] overflow-hidden rounded-xl border border-border bg-card shadow-lg dark:bg-card">
+        <div className="absolute right-0 top-full z-50 mt-2 max-w-[calc(100vw_-_1rem)] min-w-[140px] overflow-hidden rounded-xl border border-border bg-card shadow-lg dark:bg-card">
           {languages.map((l) => (
             <button
               key={l.code}

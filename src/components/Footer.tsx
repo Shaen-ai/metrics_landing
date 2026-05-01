@@ -20,7 +20,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border/80 bg-card/60 dark:bg-card/40">
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
         <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between">
           <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
             <Image
@@ -37,7 +37,7 @@ export function Footer() {
             </span>
           </Link>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 sm:gap-x-6">
             {linkKeys.map((l) =>
               l.href.startsWith("mailto:") ? (
                 <a

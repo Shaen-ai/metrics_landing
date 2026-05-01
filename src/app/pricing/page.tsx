@@ -17,7 +17,7 @@ export default function PricingPage() {
   return (
     <>
       {/* Hero */}
-      <SectionWrapper className="pt-32 text-center">
+      <SectionWrapper className="pt-24 text-center sm:pt-32">
         <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           {t("pricing.title")}
         </h1>
@@ -30,8 +30,8 @@ export default function PricingPage() {
       </SectionWrapper>
 
       {/* Cards */}
-      <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-8">
-        <div className="grid gap-6 lg:grid-cols-4">
+      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-8">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-4 lg:gap-y-0">
           {tiers.map((tier, i) => (
             <PricingCard
               key={tier.id}
@@ -46,7 +46,7 @@ export default function PricingPage() {
 
       {/* Comparison table (desktop) */}
       <SectionWrapper className="border-t border-border/50 dark:border-border/40">
-        <h2 className="mb-12 text-center text-2xl font-bold text-foreground sm:text-3xl">
+        <h2 className="mb-8 text-center text-2xl font-bold text-foreground sm:mb-12 sm:text-3xl">
           {t("pricing.comparePlans")}
         </h2>
 

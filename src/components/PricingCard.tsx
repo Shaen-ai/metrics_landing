@@ -32,7 +32,7 @@ export function PricingCard({ tier, features, annual, index }: PricingCardProps)
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       className={cn(
-        "relative flex flex-col rounded-2xl border p-6 lg:p-8",
+        "relative flex flex-col rounded-2xl border p-5 sm:p-6 lg:row-span-4 lg:grid lg:grid-rows-subgrid lg:p-8",
         tier.popular
           ? "border-primary/45 bg-primary-muted/50 shadow-lg shadow-primary/15 dark:bg-primary-muted/30"
           : "border-border bg-card dark:bg-card/60",

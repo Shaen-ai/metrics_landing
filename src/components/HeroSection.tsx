@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Button } from "./Button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -16,7 +17,7 @@ export function HeroSection() {
         <div className="absolute -top-20 left-1/4 h-[400px] w-[400px] rounded-full bg-[var(--gradient-to)]/8 blur-3xl dark:bg-[var(--gradient-to)]/10" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-32 lg:px-8 lg:pt-40">
+      <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-20 sm:px-6 sm:pb-24 sm:pt-32 lg:px-8 lg:pt-40">
         <motion.div
           initial={false}
           animate={{ opacity: 1, y: 0 }}
@@ -44,12 +45,12 @@ export function HeroSection() {
             {t("hero.subtitle")}
           </p>
 
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Button href={getStartedHref()}>
+          <div className="mt-8 flex flex-col items-stretch gap-3 sm:mt-10 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
+            <Button href={getStartedHref()} className="w-full sm:w-auto">
               {t("hero.startTrial")}
               <ArrowRight size={16} />
             </Button>
-            <Button variant="secondary" href="/pricing">
+            <Button variant="secondary" href="/pricing" className="w-full sm:w-auto">
               {t("hero.seePricing")}
             </Button>
           </div>
@@ -59,19 +60,17 @@ export function HeroSection() {
           initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-          className="relative mx-auto mt-20 max-w-5xl"
+          className="relative mx-auto mt-12 max-w-5xl sm:mt-20"
         >
-          <div className="aspect-video rounded-2xl border border-border bg-gradient-to-br from-secondary/80 to-card p-1 shadow-2xl shadow-primary/10 dark:from-card dark:to-muted/30">
-            <div className="flex h-full w-full items-center justify-center rounded-xl bg-card/80 dark:bg-card/50">
-              <div className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-muted">
-                  <Sparkles size={28} className="text-primary" />
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  {t("hero.demoPlaceholder")}
-                </p>
-              </div>
-            </div>
+          <div className="aspect-video overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-secondary/80 to-card p-1 shadow-2xl shadow-primary/10 dark:from-card dark:to-muted/30">
+            <Image
+              src="/product-demo.png"
+              alt={t("hero.demoPlaceholder")}
+              width={1024}
+              height={576}
+              priority
+              className="h-full w-full rounded-xl object-cover"
+            />
           </div>
         </motion.div>
       </div>

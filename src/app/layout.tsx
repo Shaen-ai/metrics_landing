@@ -11,10 +11,44 @@ import type { LanguageCode } from "@/lib/translations";
 
 const inter = Inter({ variable: "--font-sans", subsets: ["latin"], display: "swap" });
 
+const siteUrl = "https://tunzone.com";
+const title = "Tunzone — 3D Furniture Platform";
+const description =
+  "Transform product photos into 3D models, build immersive room planners, and sell modular furniture online.";
+
 export const metadata: Metadata = {
-  title: "Tunzone — 3D Furniture Platform",
-  description:
-    "Transform product photos into 3D models, build immersive room planners, and sell modular furniture online.",
+  metadataBase: new URL(siteUrl),
+  applicationName: "Tunzone",
+  title,
+  description,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Tunzone",
+    title,
+    description,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Tunzone 3D furniture platform",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/opengraph-image"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [
       { url: "/favicon.ico" },

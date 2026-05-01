@@ -54,7 +54,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {featureKeys.map((f, i) => (
             <FeatureCard
               key={f.titleKey}
@@ -78,7 +78,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
+        <div className="mt-10 grid gap-8 sm:mt-16 md:grid-cols-3">
           {stepKeys.map((s, i) => (
             <motion.div
               key={s.titleKey}
@@ -107,7 +107,7 @@ export default function HomePage() {
           <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
             {t("socialProof.title")}
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:mt-10 sm:gap-x-12 sm:gap-y-6">
             {Array.from({ length: 5 }).map((_, i) => (
               <div
                 key={i}
@@ -121,19 +121,19 @@ export default function HomePage() {
 
       {/* CTA Banner */}
       <SectionWrapper>
-        <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-secondary via-secondary/60 to-card p-12 text-center shadow-xl shadow-primary/10 dark:from-primary-muted dark:via-card dark:to-card sm:p-16">
+        <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-secondary via-secondary/60 to-card p-6 text-center shadow-xl shadow-primary/10 dark:from-primary-muted dark:via-card dark:to-card sm:p-16">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             {t("cta.title")}
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
             {t("cta.subtitle")}
           </p>
-          <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Button href={getStartedHref()}>
+          <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
+            <Button href={getStartedHref()} className="w-full sm:w-auto">
               {t("cta.getStarted")}
               <ArrowRight size={16} />
             </Button>
-            <Button variant="secondary" href={mailtoSupportHref("Sales inquiry")}>
+            <Button variant="secondary" href={mailtoSupportHref("Sales inquiry")} className="w-full sm:w-auto">
               {t("cta.contactSales")}
             </Button>
           </div>
