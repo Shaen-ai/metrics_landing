@@ -27,7 +27,7 @@ export interface PricingTier {
   };
 }
 
-/** Annual display = monthly × 11/12 (1 month free when billed yearly). Keep quotas in sync with backend config/plans.php */
+/** Annual display = monthly × 11/12 (14 days free when billed yearly). Keep quotas in sync with backend config/plans.php */
 export const tiers: PricingTier[] = [
   {
     id: "starter",
@@ -95,11 +95,11 @@ export const features: PricingFeature[] = [
     enterprise: "Unlimited",
   },
   {
-    label: "Room Photo Assist",
-    starter: false,
-    business: true,
-    "business-pro": true,
-    enterprise: true,
+    label: "AI Interior Design (generations / mo)",
+    starter: "100",
+    business: "200",
+    "business-pro": "500",
+    enterprise: "Custom",
   },
   {
     label: "Priority processing",
