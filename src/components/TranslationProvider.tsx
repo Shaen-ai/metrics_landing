@@ -4,12 +4,12 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useLayoutEffect,
   useMemo,
   useState,
   type ReactNode,
 } from "react";
+import { defaultLanguageFromClientHints } from "@/lib/requestLanguage";
 import {
   getTranslation,
   translatePricing,
@@ -27,6 +27,7 @@ type TranslationContextValue = {
 const TranslationContext = createContext<TranslationContextValue | null>(null);
 
 const COOKIE_NAME = "tunzone-lang";
+const STORAGE_KEY = "tunzone-lang";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
 function setLanguageCookie(code: LanguageCode) {
@@ -34,20 +35,18 @@ function setLanguageCookie(code: LanguageCode) {
   document.cookie = `${COOKIE_NAME}=${code}; Path=/; Max-Age=${COOKIE_MAX_AGE}; SameSite=Lax`;
 }
 
-function normalizeStoredLanguage(value: string | null | undefined): LanguageCode | null {
+function readExplicitCookie(): LanguageCode | null {
+  if (typeof document === "undefined") return null;
+  const match = document.cookie.match(new RegExp(`(?:^|;\\s*)${COOKIE_NAME}=([^;]+)`));
+  const value = match?.[1];
   if (value === "en" || value === "ru" || value === "hy") return value;
   return null;
 }
 
-function readCookieLanguage(): LanguageCode | null {
-  if (typeof document === "undefined") return null;
-  const match = document.cookie.match(new RegExp(`(?:^|;\\s*)${COOKIE_NAME}=([^;]+)`));
-  return normalizeStoredLanguage(match?.[1]);
-}
-
-function readStoredLanguage(): LanguageCode | null {
-  if (typeof window === "undefined") return null;
-  return normalizeStoredLanguage(localStorage.getItem("tunzone-lang"));
+/** Remove old auto-saved localStorage entries (no longer used for defaults). */
+function clearLegacyLanguageStorage() {
+  if (typeof window === "undefined") return;
+  localStorage.removeItem(STORAGE_KEY);
 }
 
 export function TranslationProvider({
@@ -60,21 +59,18 @@ export function TranslationProvider({
   const [lang, setLang] = useState<LanguageCode>(initialLang);
 
   useLayoutEffect(() => {
-    const preferred = readCookieLanguage() ?? readStoredLanguage();
-    if (preferred !== null) {
-      setLangStorage(preferred);
-      setLanguageCookie(preferred);
-      if (preferred !== initialLang) {
-        setLang(preferred);
-      }
+    const explicit = readExplicitCookie();
+    if (explicit !== null) {
+      setLangStorage(explicit);
+      setLang(explicit);
+      return;
     }
-  }, [initialLang]);
 
-  useEffect(() => {
-    if (readStoredLanguage() === null) {
-      setLangStorage(lang);
-    }
-  }, [lang]);
+    clearLegacyLanguageStorage();
+
+    const inferred = defaultLanguageFromClientHints();
+    setLang(inferred);
+  }, [initialLang]);
 
   const changeLang = useCallback((code: LanguageCode) => {
     setLangStorage(code);

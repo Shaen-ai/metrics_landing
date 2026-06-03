@@ -19,8 +19,8 @@ export default function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           background:
-            "linear-gradient(135deg, #050816 0%, #10172a 46%, #2563eb 100%)",
-          color: "#f8fafc",
+            "linear-gradient(135deg, #1a1614 0%, #2a1f18 46%, #d4622a 100%)",
+          color: "#f2eee7",
           fontFamily: "Inter, Arial, sans-serif",
           padding: 72,
         }}
@@ -43,8 +43,8 @@ export default function Image() {
               alignItems: "center",
               justifyContent: "center",
               borderRadius: 16,
-              background: "#f8fafc",
-              color: "#2563eb",
+              background: "#F7F3ED",
+              color: "#d4622a",
               fontSize: 28,
             }}
           >
@@ -68,7 +68,7 @@ export default function Image() {
           <div
             style={{
               maxWidth: 760,
-              color: "#cbd5e1",
+              color: "#ede6db",
               fontSize: 32,
               lineHeight: 1.35,
             }}
@@ -83,7 +83,7 @@ export default function Image() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            color: "#dbeafe",
+            color: "#f0e8dc",
             fontSize: 26,
             fontWeight: 700,
           }}

@@ -31,8 +31,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
         aria-label="Change language"
         className={cn(
           "flex h-10 items-center gap-1.5 rounded-lg px-2 transition-colors cursor-pointer sm:h-9",
-          "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100",
-          "hover:bg-zinc-100 dark:hover:bg-zinc-800",
+          "text-muted-foreground hover:text-foreground hover:bg-muted",
         )}
       >
         <Globe size={18} />

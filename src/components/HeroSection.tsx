@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Button } from "./Button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
-import { getStartedHref } from "@/lib/appUrl";
 
 export function HeroSection() {
   const { t } = useTranslation();
@@ -13,8 +12,7 @@ export function HeroSection() {
   return (
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl dark:bg-primary/15" />
-        <div className="absolute -top-20 left-1/4 h-[400px] w-[400px] rounded-full bg-[var(--gradient-to)]/8 blur-3xl dark:bg-[var(--gradient-to)]/10" />
+        <div className="absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl dark:bg-primary/8" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-20 sm:px-6 sm:pb-24 sm:pt-32 lg:px-8 lg:pt-40">
@@ -34,9 +32,9 @@ export function HeroSection() {
             {t("hero.badge")}
           </motion.div>
 
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+          <h1 className="font-serif italic text-4xl font-normal tracking-tight text-foreground sm:text-6xl lg:text-7xl">
             {t("hero.title1")}
-            <span className="bg-gradient-to-r from-primary via-[var(--gradient-to)] to-amber-600 bg-clip-text text-transparent dark:to-amber-500">
+            <span className="text-primary">
               {t("hero.highlight")}
             </span>
           </h1>
@@ -46,7 +44,7 @@ export function HeroSection() {
           </p>
 
           <div className="mt-8 flex flex-col items-stretch gap-3 sm:mt-10 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
-            <Button href={getStartedHref()} className="w-full sm:w-auto">
+            <Button href="/pricing" className="w-full sm:w-auto">
               {t("hero.startTrial")}
               <ArrowRight size={16} />
             </Button>
@@ -54,6 +52,7 @@ export function HeroSection() {
               {t("hero.seePricing")}
             </Button>
           </div>
+
         </motion.div>
 
         <motion.div

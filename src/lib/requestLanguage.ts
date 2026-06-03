@@ -1,33 +1,64 @@
 import type { LanguageCode } from "./translations";
 
-/**
- * Prefer explicit hy/ru entries in Accept-Language; otherwise English.
- * Same priority as reading `navigator.language` on the client for hy/ru hints.
- */
-export function languageFromAcceptLanguageHeader(
-  accept: string | null | undefined,
-): LanguageCode {
-  if (!accept || typeof accept !== "string") return "en";
-  const parts = accept.split(",").map((p) => {
-    const [tag, qStr] = p.trim().split(";q=");
-    const q = qStr ? parseFloat(qStr) : 1;
-    return { tag: tag.trim().toLowerCase(), q: Number.isFinite(q) ? q : 1 };
-  });
-  parts.sort((a, b) => b.q - a.q);
-  for (const { tag } of parts) {
-    const base = tag.split("-")[0];
-    if (base === "hy") return "hy";
-    if (base === "ru") return "ru";
+const ARMENIA_COUNTRY = "AM";
+
+/** Country code from common edge / hosting headers (Vercel, Cloudflare, etc.). */
+export function countryFromRequestHeaders(
+  headers: Headers | { get(name: string): string | null },
+): string | null {
+  const keys = [
+    "x-vercel-ip-country",
+    "cf-ipcountry",
+    "x-country-code",
+    "cloudfront-viewer-country",
+  ];
+  for (const key of keys) {
+    const value = headers.get(key)?.trim().toUpperCase();
+    if (value && value.length === 2) return value;
   }
+  return null;
+}
+
+/**
+ * Default language when the user has not chosen one explicitly (no cookie).
+ * Armenia → Armenian; everywhere else → English.
+ */
+export function defaultLanguageFromGeo(countryCode: string | null | undefined): LanguageCode {
+  if (countryCode?.toUpperCase() === ARMENIA_COUNTRY) return "hy";
   return "en";
 }
 
-export function languageFromCookieOrAccept(
+/**
+ * Client fallback when geo headers are unavailable (e.g. local dev).
+ */
+export function defaultLanguageFromClientHints(): LanguageCode {
+  if (typeof window === "undefined") return "en";
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tz === "Asia/Yerevan") return "hy";
+  } catch {
+    /* ignore */
+  }
+  const nav = (navigator.language ?? "").toLowerCase();
+  if (nav.startsWith("hy")) return "hy";
+  return "en";
+}
+
+/** User picked a language in the switcher (cookie set via changeLang only). */
+export function languageFromExplicitCookie(
   cookieValue: string | undefined,
-  acceptLanguage: string | null,
-): LanguageCode {
+): LanguageCode | null {
   if (cookieValue === "en" || cookieValue === "ru" || cookieValue === "hy") {
     return cookieValue;
   }
-  return languageFromAcceptLanguageHeader(acceptLanguage);
+  return null;
+}
+
+export function languageFromCookieOrGeo(
+  cookieValue: string | undefined,
+  countryCode: string | null | undefined,
+): LanguageCode {
+  const explicit = languageFromExplicitCookie(cookieValue);
+  if (explicit !== null) return explicit;
+  return defaultLanguageFromGeo(countryCode);
 }

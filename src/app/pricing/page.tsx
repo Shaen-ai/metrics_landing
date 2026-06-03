@@ -18,7 +18,7 @@ export default function PricingPage() {
     <>
       {/* Hero */}
       <SectionWrapper className="pt-24 text-center sm:pt-32">
-        <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+        <h1 className="font-serif italic text-4xl font-normal tracking-tight text-foreground sm:text-5xl">
           {t("pricing.title")}
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
@@ -90,7 +90,7 @@ export default function PricingPage() {
                                 className="mx-auto text-primary"
                               />
                             ) : (
-                              <X size={16} className="mx-auto text-zinc-300 dark:text-zinc-700" />
+                              <X size={16} className="mx-auto text-muted-foreground/40" />
                             )
                           ) : (
                             <span className="text-foreground/90">{tp(val)}</span>

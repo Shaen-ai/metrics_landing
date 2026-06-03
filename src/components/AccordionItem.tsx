@@ -21,11 +21,11 @@ export function AccordionItem({ question, answer, defaultOpen = false }: Accordi
         onClick={() => setOpen(!open)}
         className="flex w-full items-center justify-between gap-4 py-5 text-left"
       >
-        <span className="text-base font-medium text-foreground">{question}</span>
+        <span className="font-serif italic text-base font-medium text-foreground">{question}</span>
         <ChevronDown
           size={18}
           className={cn(
-            "shrink-0 text-zinc-400 transition-transform duration-200 dark:text-zinc-500",
+            "shrink-0 text-muted-foreground transition-transform duration-200",
             open && "rotate-180",
           )}
         />

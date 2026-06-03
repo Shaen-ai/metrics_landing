@@ -69,7 +69,7 @@ export default function AboutPage() {
       {/* About */}
       <SectionWrapper className="pt-32">
         <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="font-serif italic text-4xl font-normal tracking-tight text-foreground sm:text-5xl">
             {t("about.title")}
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
@@ -106,7 +106,7 @@ export default function AboutPage() {
           <div className="grid gap-16 lg:grid-cols-2">
             {/* Info */}
             <div>
-              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              <h2 className="font-serif italic text-3xl font-normal tracking-tight text-foreground sm:text-4xl">
                 {t("about.getInTouch")}
               </h2>
               <p className="mt-4 text-muted-foreground">

@@ -1,5 +1,24 @@
 import { CONTACT_SUPPORT_EMAIL } from "./contact";
 
+/* ── B2C consumer credit packages ─────────────────────────────────────── */
+
+export interface ConsumerCreditPackage {
+  id: string;
+  name: string;
+  credits: number;
+  priceUsd: number;
+  perDesignCost: string;
+  popular?: boolean;
+}
+
+export const consumerPackages: ConsumerCreditPackage[] = [
+  { id: "starter-pack", name: "Starter", credits: 10, priceUsd: 5, perDesignCost: "$0.50" },
+  { id: "popular-pack", name: "Designer", credits: 30, priceUsd: 10, perDesignCost: "$0.33", popular: true },
+  { id: "pro-pack", name: "Pro", credits: 100, priceUsd: 29, perDesignCost: "$0.29" },
+];
+
+/* ── B2B subscription tiers ───────────────────────────────────────────── */
+
 /** Column order for the pricing table and feature matrix (matches tier ids). */
 export const TIER_COLUMN_IDS = ["starter", "business", "business-pro", "enterprise"] as const;
 export type TierColumnId = (typeof TIER_COLUMN_IDS)[number];
@@ -17,7 +36,6 @@ export interface PricingTier {
   name: string;
   monthlyPrice: number | null;
   annualPrice: number | null;
-  description: string;
   cta: string;
   ctaHref: string;
   popular?: boolean;
@@ -27,14 +45,13 @@ export interface PricingTier {
   };
 }
 
-/** Annual display = monthly × 11/12 (14 days free when billed yearly). Keep quotas in sync with backend config/plans.php */
+/** Annual display = monthly × 11/12. Keep quotas in sync with backend config/plans.php */
 export const tiers: PricingTier[] = [
   {
     id: "starter",
     name: "Starter",
     monthlyPrice: 59,
     annualPrice: 54,
-    description: "For individual sellers launching their first 3D catalog.",
     cta: "Get Started",
     ctaHref: "#",
     quotas: { imageTo3dMonth1: 100, imageTo3dOngoing: 25 },
@@ -44,7 +61,6 @@ export const tiers: PricingTier[] = [
     name: "Business",
     monthlyPrice: 119,
     annualPrice: 109,
-    description: "For growing brands that need more models and team collaboration.",
     cta: "Get Started",
     ctaHref: "#",
     popular: true,
@@ -55,7 +71,6 @@ export const tiers: PricingTier[] = [
     name: "Business Pro",
     monthlyPrice: 219,
     annualPrice: 201,
-    description: "For established businesses with large catalogs and advanced needs.",
     cta: "Get Started",
     ctaHref: "#",
     quotas: { imageTo3dMonth1: 400, imageTo3dOngoing: 100 },
@@ -65,7 +80,6 @@ export const tiers: PricingTier[] = [
     name: "Enterprise",
     monthlyPrice: null,
     annualPrice: null,
-    description: "Custom volume, integrations, SLA, and dedicated support for large organizations.",
     cta: "Contact Sales",
     ctaHref: `mailto:${CONTACT_SUPPORT_EMAIL}?subject=Enterprise%20plan%20inquiry`,
     quotas: { imageTo3dMonth1: null, imageTo3dOngoing: null },

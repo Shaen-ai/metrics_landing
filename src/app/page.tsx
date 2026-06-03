@@ -1,6 +1,7 @@
 "use client";
 
 import { HeroSection } from "@/components/HeroSection";
+import { ProjectShowcaseSection } from "@/components/ProjectShowcaseSection";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { FeatureCard } from "@/components/FeatureCard";
 import { Button } from "@/components/Button";
@@ -42,11 +43,12 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <ProjectShowcaseSection />
 
       {/* Features */}
       <SectionWrapper id="features">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="font-serif italic text-3xl font-normal tracking-tight text-foreground sm:text-4xl">
             {t("features.title")}
           </h2>
           <p className="mt-4 text-muted-foreground">
@@ -70,7 +72,7 @@ export default function HomePage() {
       {/* How it works */}
       <SectionWrapper className="border-t border-border/50 dark:border-border/40">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="font-serif italic text-3xl font-normal tracking-tight text-foreground sm:text-4xl">
             {t("howItWorks.title")}
           </h2>
           <p className="mt-4 text-muted-foreground">
@@ -121,15 +123,15 @@ export default function HomePage() {
 
       {/* CTA Banner */}
       <SectionWrapper>
-        <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-secondary via-secondary/60 to-card p-6 text-center shadow-xl shadow-primary/10 dark:from-primary-muted dark:via-card dark:to-card sm:p-16">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-6 text-center sm:p-16">
+          <h2 className="font-serif italic text-3xl font-normal tracking-tight text-foreground sm:text-4xl">
             {t("cta.title")}
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
             {t("cta.subtitle")}
           </p>
           <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
-            <Button href={getStartedHref()} className="w-full sm:w-auto">
+            <Button href={getStartedHref()} sameTab className="w-full sm:w-auto">
               {t("cta.getStarted")}
               <ArrowRight size={16} />
             </Button>

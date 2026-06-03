@@ -32,10 +32,10 @@ export function PricingCard({ tier, features, annual, index }: PricingCardProps)
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       className={cn(
-        "relative flex flex-col rounded-2xl border p-5 sm:p-6 lg:row-span-4 lg:grid lg:grid-rows-subgrid lg:p-8",
+        "relative flex flex-col rounded-[20px] border p-5 sm:p-6 lg:row-span-4 lg:grid lg:grid-rows-subgrid lg:p-8",
         tier.popular
-          ? "border-primary/45 bg-primary-muted/50 shadow-lg shadow-primary/15 dark:bg-primary-muted/30"
-          : "border-border bg-card dark:bg-card/60",
+          ? "border-primary/45 bg-primary-muted/50 dark:bg-primary-muted/30"
+          : "border-border bg-card",
       )}
     >
       {tier.popular && (
@@ -45,7 +45,7 @@ export function PricingCard({ tier, features, annual, index }: PricingCardProps)
       )}
 
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-foreground">{tier.name}</h3>
+        <h3 className="font-serif italic text-lg font-semibold text-foreground">{tier.name}</h3>
         <p className="mt-1 text-sm text-muted-foreground">{t(`tier.${tier.id}Desc`)}</p>
       </div>
 
@@ -88,7 +88,7 @@ export function PricingCard({ tier, features, annual, index }: PricingCardProps)
               {included ? (
                 <Check size={16} className="mt-0.5 shrink-0 text-primary" />
               ) : (
-                <X size={16} className="mt-0.5 shrink-0 text-zinc-300 dark:text-zinc-600" />
+                <X size={16} className="mt-0.5 shrink-0 text-muted-foreground/40" />
               )}
               <span className={cn(included ? "text-secondary-foreground/90 dark:text-foreground/90" : "text-muted-foreground/60 dark:text-muted-foreground/50")}>
                 {tp(f.label)}

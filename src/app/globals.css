@@ -1,46 +1,61 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(html[data-theme="dark"] *));
 
-/* Align with metrics_platform_published: warm cream + logo orange */
 :root {
-  --background: #fff8f0;
-  --foreground: #1a1a1a;
-  --card: #ffffff;
-  --primary: #e8772e;
+  --font-sans: "Noto Sans Armenian", "Inter Tight", "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Noto Serif Armenian", "Fraunces", Georgia, serif;
+  --font-brand: "Fraunces", "EB Garamond", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --background: #EAE5DC;
+  --foreground: #1a1614;
+  --card: #F5F1EB;
+  --card-foreground: #1a1614;
+  --primary: #c8622a;
   --primary-foreground: #ffffff;
-  --primary-muted: rgba(232, 119, 46, 0.12);
-  --primary-muted-strong: rgba(232, 119, 46, 0.2);
-  --secondary: #fef3e7;
-  --secondary-foreground: #1a1a1a;
-  --muted: #fef3e7;
-  --muted-foreground: #6b7280;
-  --border: #f0e6d8;
-  --ring: #e8772e;
-  --gradient-to: #f26a21;
+  --primary-muted: rgba(200, 98, 42, 0.12);
+  --primary-muted-strong: rgba(200, 98, 42, 0.2);
+  --secondary: #e8e1d5;
+  --secondary-foreground: #3a342c;
+  --muted: #e2dbd0;
+  --muted-foreground: #8a7f70;
+  --accent: #ede8df;
+  --accent-foreground: #3a342c;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #d4cabc;
+  --input: #ccc3b2;
+  --ring: #c8622a;
 }
 
-.dark {
-  --background: #0c0a09;
-  --foreground: #fafaf9;
-  --card: #1c1917;
+html[data-theme="dark"] {
+  --background: #0f0e0c;
+  --foreground: #f2eee7;
+  --card: #1a1814;
+  --card-foreground: #f2eee7;
   --primary: #e8772e;
   --primary-foreground: #ffffff;
   --primary-muted: rgba(232, 119, 46, 0.15);
   --primary-muted-strong: rgba(232, 119, 46, 0.22);
-  --secondary: #292524;
-  --secondary-foreground: #fafaf9;
-  --muted: #292524;
-  --muted-foreground: #a8a29e;
-  --border: #3f3a36;
+  --secondary: #221e1a;
+  --secondary-foreground: #f2eee7;
+  --muted: #211e1a;
+  --muted-foreground: #857d6f;
+  --accent: #2a2420;
+  --accent-foreground: #f2eee7;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #2e2820;
+  --input: #2e2820;
   --ring: #e8772e;
-  --gradient-to: #f26a21;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-muted: var(--primary-muted);
@@ -49,11 +64,36 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
+  --color-input: var(--input);
   --color-ring: var(--ring);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
 }

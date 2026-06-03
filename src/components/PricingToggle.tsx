@@ -16,7 +16,7 @@ export function PricingToggle({ annual, onChange }: PricingToggleProps) {
       <span
         className={cn(
           "text-sm font-medium transition-colors",
-          !annual ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-400 dark:text-zinc-500",
+          !annual ? "text-foreground" : "text-muted-foreground",
         )}
       >
         {t("pricing.monthly")}
@@ -45,7 +45,7 @@ export function PricingToggle({ annual, onChange }: PricingToggleProps) {
       <span
         className={cn(
           "text-sm font-medium transition-colors",
-          annual ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-400 dark:text-zinc-500",
+          annual ? "text-foreground" : "text-muted-foreground",
         )}
       >
         {t("pricing.annual")}{" "}

@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import "./globals.css";
+import "./design.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { TranslationProvider } from "@/components/TranslationProvider";
+import { countryFromRequestHeaders, languageFromCookieOrGeo } from "@/lib/requestLanguage";
 import type { LanguageCode } from "@/lib/translations";
+import { themeBootScript } from "@/lib/theme";
 
-const inter = Inter({ variable: "--font-sans", subsets: ["latin"], display: "swap" });
+const GOOGLE_FONTS_URL =
+  "https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..600;1,300..600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+Armenian:wght@300;400;500;600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&display=swap";
 
 const siteUrl = "https://tunzone.com";
 const title = "Tunzone — 3D Furniture Platform";
@@ -67,23 +70,27 @@ function htmlLangFromCode(code: LanguageCode): string {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const h = await headers();
-  const raw = h.get("x-tunzone-lang");
-  const initialLang: LanguageCode =
-    raw === "en" || raw === "ru" || raw === "hy" ? raw : "en";
+  const cookieStore = await cookies();
+  const initialLang: LanguageCode = languageFromCookieOrGeo(
+    cookieStore.get("tunzone-lang")?.value,
+    countryFromRequestHeaders(h),
+  );
 
   return (
-    <html lang={htmlLangFromCode(initialLang)} className="dark scroll-smooth" suppressHydrationWarning>
+    <html lang={htmlLangFromCode(initialLang)} className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* Prevent flash of wrong theme */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href={GOOGLE_FONTS_URL} rel="stylesheet" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="light")document.documentElement.classList.remove("dark");else if(t==="dark"||!window.matchMedia("(prefers-color-scheme: light)").matches)document.documentElement.classList.add("dark");else document.documentElement.classList.remove("dark")}catch(e){}})()`,
+            __html: themeBootScript,
           }}
         />
       </head>
       <body
         suppressHydrationWarning
-        className={`${inter.variable} font-sans antialiased bg-background text-foreground transition-colors duration-300`}
+        className="font-sans antialiased bg-background text-foreground transition-colors duration-300"
       >
         <GoogleAnalytics />
         <ThemeProvider>

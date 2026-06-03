@@ -6,21 +6,6 @@ export const languages = [
 
 export type LanguageCode = (typeof languages)[number]["code"];
 
-export function normalizeLanguageCode(lang: string | undefined | null): LanguageCode {
-  if (lang === "en") return "en";
-  if (lang === "ru") return "ru";
-  return "hy";
-}
-
-export function getLanguage(): LanguageCode {
-  if (typeof window !== "undefined") {
-    const stored = localStorage.getItem("tunzone-lang");
-    if (stored === "en") return "en";
-    if (stored === "ru") return "ru";
-  }
-  return "hy";
-}
-
 export function setLanguage(lang: LanguageCode) {
   if (typeof window !== "undefined") {
     localStorage.setItem("tunzone-lang", lang);
@@ -65,6 +50,7 @@ const pricingKeyMap: Record<string, string> = {
 export const translations: Record<LanguageCode, Record<string, string>> = {
   en: {
     "nav.home": "Home",
+    "nav.aiDesign": "AI Design",
     "nav.pricing": "Pricing",
     "nav.faq": "FAQ",
     "nav.about": "About",
@@ -75,9 +61,29 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "hero.title1": "More sales, ",
     "hero.highlight": "less effort",
     "hero.subtitle": "Upload an image, get a 3D model in minutes. Build immersive room planners, configure modular kitchens, and let customers design their dream spaces \u2014 all under one subscription.",
-    "hero.startTrial": "Subscribe now \u2014 pay in 14 days",
+    "hero.startTrial": "Subscribe Now",
     "hero.seePricing": "See Pricing",
     "hero.demoPlaceholder": "Product demo \u2014 screenshot or video goes here",
+
+    "showcase.eyebrow": "Our products",
+    "showcase.title": "Two products, one ecosystem",
+    "showcase.subtitle": "Consumer AI interior design and a full B2B platform for brands\u2014pick the experience that fits you.",
+    "showcase.vista.title": "Vista",
+    "showcase.vista.subtitle": "B2C \u00b7 AI Interior Design",
+    "showcase.vista.desc": "Upload a room photo, browse real furniture from local stores, and get photorealistic AI redesigns in seconds\u2014no designer appointment needed.",
+    "showcase.vista.feature1": "Room photo upload & AI layout",
+    "showcase.vista.feature2": "Real products from local retailers",
+    "showcase.vista.feature3": "Quick & project design modes",
+    "showcase.vista.feature4": "Pay-per-design credits, no subscription",
+    "showcase.vista.cta": "Explore Vista",
+    "showcase.metric.title": "Metric Platform (Published)",
+    "showcase.metric.subtitle": "B2B \u00b7 Analytics & storefront",
+    "showcase.metric.desc": "Turn product photos into 3D models, power immersive planners, and launch a published storefront where customers configure and order\u2014all under one subscription.",
+    "showcase.metric.feature1": "Image-to-3D catalog in minutes",
+    "showcase.metric.feature2": "Room, kitchen & wardrobe planners",
+    "showcase.metric.feature3": "Published storefront with unique URL",
+    "showcase.metric.feature4": "Orders, AI chat & modular catalog",
+    "showcase.metric.cta": "Learn More",
 
     "features.title": "Everything you need to sell furniture in 3D",
     "features.subtitle": "From photo to 3D model to customer order \u2014 one platform replaces five tools.",
@@ -87,8 +93,6 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "features.roomPlannersDesc": "Room, kitchen, wardrobe, and module planners let customers design spaces with drag-and-drop 3D furniture.",
     "features.aiChat": "AI Chat Assistant",
     "features.aiChatDesc": "Customers describe what they want in plain language \u2014 \"Add a blue table, 120\u00a0cm wide\" \u2014 and the AI builds it on canvas.",
-    "features.photoAssist": "Room Photo Assist",
-    "features.photoAssistDesc": "Upload a room photo and our vision AI identifies dimensions, furniture placement, and suggests layouts.",
     "features.modularCatalog": "Modular Catalog",
     "features.modularCatalogDesc": "Build configurable templates with materials, handles, and pricing rules. Customers customize in real-time.",
     "features.orders": "Orders & Storefront",
@@ -107,7 +111,7 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "socialProof.title": "Trusted by furniture brands worldwide",
 
     "cta.title": "Ready to transform your catalog?",
-    "cta.subtitle": "Subscribe now, pay 14 days later. Complete checkout with a card on file\u2014your first plan charge is after the trial, not today. Full plan allowances apply during the trial, including the first-month image-to-3D bonus.",
+    "cta.subtitle": "Complete checkout and start using full plan allowances immediately, including the first-month image-to-3D bonus.",
     "cta.getStarted": "Get Started",
     "cta.contactSales": "Contact Sales",
 
@@ -119,13 +123,13 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "footer.copyright": "\u00a9 {year} Tunzone. All rights reserved.",
 
     "pricing.title": "Simple, transparent pricing",
-    "pricing.subtitle": "Subscribe now, pay 14 days later. Your card confirms the subscription; the first billing runs after the trial. Includes your plan\u2019s first-month image-to-3D bonus. Scale with your catalog\u2014no hidden fees.",
+    "pricing.subtitle": "Choose your plan and start building your 3D catalog today. Includes your plan\u2019s first-month image-to-3D bonus. Scale with your catalog\u2014no hidden fees.",
     "pricing.comparePlans": "Compare plans",
     "pricing.feature": "Feature",
     "pricing.scrollHint": "Scroll up to see the plan cards for a full feature breakdown.",
     "pricing.monthly": "Monthly",
     "pricing.annual": "Annual",
-    "pricing.monthFree": "14 days free",
+    "pricing.monthFree": "Save ~8%",
     "pricing.mostPopular": "Most Popular",
     "pricing.perMonth": "/ month",
     "pricing.billedAnnually": "Billed annually",
@@ -145,7 +149,6 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "feature.imageTo3dFirst": "Image-to-3D (first month)",
     "feature.imageTo3dOngoing": "Image-to-3D (ongoing / mo)",
     "feature.aiChat": "AI Chat assistant",
-    "feature.photoAssist": "Room Photo Assist",
     "feature.interiorDesignGen": "AI Interior Design (generations / mo)",
     "feature.priority": "Priority processing",
     "feature.customDomain": "Custom domain / white-label",
@@ -175,8 +178,8 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "faq.a4": "Yes. If you upgrade, the new plan takes effect immediately and you receive the difference in credits pro-rated. If you downgrade, the change takes effect at the start of your next billing cycle.",
     "faq.q5": "How does annual billing work?",
     "faq.a5": "Annual plans are billed once per year at a discounted rate equivalent to 11 months (1 month free). You still receive your monthly credit allowance each month \u2014 the discount is purely on price.",
-    "faq.q6": "How does \u201csubscribe now, pay later\u201d work?",
-    "faq.a6": "Think of it as subscribe now, pay later: checkout starts your subscription with a saved card, and the first payment for the plan runs after the 14-day trial—not at checkout. You get full plan quotas during the trial, including the first-month image-to-3D bonus. There is no permanent free tier; you need that subscription (trial or paid).",
+    "faq.q6": "When does billing start?",
+    "faq.a6": "Your subscription and billing start as soon as you complete checkout. You get full plan quotas immediately, including the first-month image-to-3D bonus. There is no permanent free tier; an active subscription is required.",
     "faq.q8": "What payment methods do you accept?",
     "faq.a8": "We accept all major credit and debit cards (Visa, Mastercard, American Express) via Stripe. Enterprise customers can also pay by invoice with net-30 terms.",
     "faq.q9": "Can I cancel anytime?",
@@ -215,6 +218,7 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
 
   ru: {
     "nav.home": "Главная",
+    "nav.aiDesign": "AI Дизайн",
     "nav.pricing": "Цены",
     "nav.faq": "Вопросы",
     "nav.about": "О нас",
@@ -225,9 +229,29 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "hero.title1": "Больше продаж — ",
     "hero.highlight": "меньше усилий",
     "hero.subtitle": "Загрузите изображение и получите 3D-модель за минуты. Создавайте планировщики комнат, настраивайте модульные кухни и позвольте клиентам проектировать пространства — всё в одной подписке.",
-    "hero.startTrial": "Подпишитесь сейчас \u2014 платите через 14 дней",
+    "hero.startTrial": "Подписаться",
     "hero.seePricing": "Тарифы",
     "hero.demoPlaceholder": "Демо продукта — скриншот или видео",
+
+    "showcase.eyebrow": "Наши продукты",
+    "showcase.title": "Два продукта, одна экосистема",
+    "showcase.subtitle": "AI-дизайн интерьера для потребителей и B2B-платформа для брендов — выберите подходящий опыт.",
+    "showcase.vista.title": "Vista",
+    "showcase.vista.subtitle": "B2C · AI-дизайн интерьера",
+    "showcase.vista.desc": "Загрузите фото комнаты, выберите реальную мебель из местных магазинов и получите фотореалистичный AI-редизайн за секунды — без дизайнера.",
+    "showcase.vista.feature1": "Фото комнаты и AI-планировка",
+    "showcase.vista.feature2": "Реальные товары местных ритейлеров",
+    "showcase.vista.feature3": "Быстрый и проектный режимы",
+    "showcase.vista.feature4": "Кредиты за дизайн, без подписки",
+    "showcase.vista.cta": "Открыть Vista",
+    "showcase.metric.title": "Metric Platform (Published)",
+    "showcase.metric.subtitle": "B2B · Аналитика и витрина",
+    "showcase.metric.desc": "Превращайте фото в 3D-модели, запускайте планировщики и опубликованную витрину, где клиенты настраивают и заказывают — всё в одной подписке.",
+    "showcase.metric.feature1": "Image-to-3D каталог за минуты",
+    "showcase.metric.feature2": "Планировщики комнат, кухни и шкафов",
+    "showcase.metric.feature3": "Опубликованная витрина с уникальным URL",
+    "showcase.metric.feature4": "Заказы, AI-чат и модульный каталог",
+    "showcase.metric.cta": "Подробнее",
 
     "features.title": "Всё для продажи мебели в 3D",
     "features.subtitle": "От фото до 3D-модели и заказа — одна платформа заменяет пять инструментов.",
@@ -237,8 +261,6 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "features.roomPlannersDesc": "Планировщики комнат, кухни, шкафов и модулей позволяют клиентам проектировать пространства в 3D.",
     "features.aiChat": "AI-ассистент",
     "features.aiChatDesc": "Клиенты описывают желаемое — «Добавь синий стол 120 см» — и AI строит это на холсте.",
-    "features.photoAssist": "Фото-ассистент",
-    "features.photoAssistDesc": "Загрузите фото комнаты — AI определит размеры, расстановку мебели и предложит планировки.",
     "features.modularCatalog": "Модульный каталог",
     "features.modularCatalogDesc": "Создавайте настраиваемые шаблоны с материалами, ручками и ценами. Клиенты настраивают в реальном времени.",
     "features.orders": "Заказы и витрина",
@@ -257,7 +279,7 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "socialProof.title": "Нам доверяют мебельные бренды по всему миру",
 
     "cta.title": "Готовы преобразить каталог?",
-    "cta.subtitle": "Подпишитесь сейчас — первый платёж через 14 дней. Оформление в checkout с картой для будущих списаний; первое списание за тариф — после пробного периода, не сразу. Лимиты действуют в пробном периоде, включая бонус первого месяца на image-to-3D.",
+    "cta.subtitle": "Оформите подписку и сразу получите полные лимиты тарифа, включая бонус первого месяца на image-to-3D.",
     "cta.getStarted": "Начать",
     "cta.contactSales": "Связаться с нами",
 
@@ -269,13 +291,13 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "footer.copyright": "© {year} Tunzone. Все права защищены.",
 
     "pricing.title": "Простые и прозрачные цены",
-    "pricing.subtitle": "Подпишитесь сейчас — платите через 14 дней. Карта подтверждает подписку; первое списание после пробного периода. Бонус первого месяца для image-to-3D и рост без скрытых комиссий.",
+    "pricing.subtitle": "Выберите тариф и начните создавать 3D-каталог уже сегодня. Бонус первого месяца для image-to-3D. Рост без скрытых комиссий.",
     "pricing.comparePlans": "Сравнить тарифы",
     "pricing.feature": "Функция",
     "pricing.scrollHint": "Прокрутите вверх, чтобы увидеть карточки тарифов.",
     "pricing.monthly": "Ежемесячно",
     "pricing.annual": "Годовой",
-    "pricing.monthFree": "14 дней бесплатно",
+    "pricing.monthFree": "Экономия ~8%",
     "pricing.mostPopular": "Популярный",
     "pricing.perMonth": "/ мес",
     "pricing.billedAnnually": "При годовой оплате",
@@ -295,7 +317,6 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "feature.imageTo3dFirst": "Image-to-3D (первый месяц)",
     "feature.imageTo3dOngoing": "Image-to-3D (далее / мес)",
     "feature.aiChat": "AI-ассистент",
-    "feature.photoAssist": "Фото-ассистент комнаты",
     "feature.interiorDesignGen": "AI дизайн интерьера (генераций / мес)",
     "feature.priority": "Приоритетная обработка",
     "feature.customDomain": "Свой домен / white-label",
@@ -325,8 +346,8 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "faq.a4": "Да. При повышении новый тариф вступает в силу сразу, и вы получаете разницу в кредитах пропорционально. При понижении изменения вступают в силу с начала следующего цикла.",
     "faq.q5": "Как работает годовая оплата?",
     "faq.a5": "Годовые планы оплачиваются раз в год со скидкой, эквивалентной 11 месяцам (1 месяц бесплатно). Месячные кредиты начисляются ежемесячно — скидка только на цену.",
-    "faq.q6": "Что значит «подпишитесь сейчас — платите через 14 дней»?",
-    "faq.a6": "По сути: подпишитесь сейчас — платите через 14 дней. В checkout создаётся подписка, карта привязана, но первое списание за тариф — после пробного периода. Полные квоты уже в пробный период, включая бонус первого месяца. Постоянного бесплатного тарифа нет — нужна подписка в пробном или оплаченном статусе.",
+    "faq.q6": "Когда начинается списание?",
+    "faq.a6": "Подписка и оплата начинаются сразу после оформления в checkout. Полные лимиты тарифа доступны сразу, включая бонус первого месяца на image-to-3D. Постоянного бесплатного тарифа нет — нужна активная подписка.",
     "faq.q8": "Какие способы оплаты вы принимаете?",
     "faq.a8": "Мы принимаем все основные кредитные и дебетовые карты (Visa, Mastercard, American Express) через Stripe. Клиенты Enterprise могут оплачивать по счёту с отсрочкой 30 дней.",
     "faq.q9": "Можно ли отменить в любое время?",
@@ -364,20 +385,41 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
   },
 
   hy: {
-    "nav.home": "Գլխավոր",
-    "nav.pricing": "Բաժանորդագրություն",
-    "nav.faq": "ՀՏՀ",
-    "nav.about": "Մեր մասին",
-    "nav.signIn": "Մուտք",
-    "nav.getStarted": "Սկսել",
+    "nav.home": "\u0533\u056c\u056d\u0561\u057e\u0578\u0580",
+    "nav.aiDesign": "AI \u0534\u056b\u0566\u0561\u0575\u0576",
+    "nav.pricing": "\u0532\u0561\u056a\u0561\u0576\u0578\u0580\u0564\u0561\u0563\u0580\u0578\u0582\u0569\u0575\u0578\u0582\u0576",
+    "nav.faq": "\u0540\u054f\u0540",
+    "nav.about": "\u0544\u0565\u0580 \u0574\u0561\u057d\u056b\u0576",
+    "nav.signIn": "\u0544\u0578\u0582\u057f\u0584",
+    "nav.getStarted": "\u054d\u056f\u057d\u0565\u056c",
 
     "hero.badge": "Կահույքի հարթակ՝ արհեստական բանականությամբ",
     "hero.title1": "Ավելի շատ վաճառք, ",
     "hero.highlight": "ավելի քիչ ջանք",
     "hero.subtitle": "Վերբեռնեք պատկերը և ստացեք 3D մոդել՝ րոպեների ընթացքում։ Ստեղծեք սենյակների պլաններ, նախագծեք մոդուլային խոհանոցներ և թույլ տվեք հաճախորդներին ձևավորել իրենց երազանքի տարածությունը:",
-    "hero.startTrial": "Բաժանորդագրվեք հիմա \u2014 վճարեք 14 օր հետո",
+    "hero.startTrial": "Բաժանորդագրվեք",
     "hero.seePricing": "Տեսնել գները",
     "hero.demoPlaceholder": "Ապրանքի դեմո — սկրինշոթ կամ տեսանյութ",
+
+    "showcase.eyebrow": "Մեր ապրանքները",
+    "showcase.title": "Երկու ապրանք, մեկ էկոհամակարգ",
+    "showcase.subtitle": "Սպառողական AI ինտերիերի դիզայն և B2B հարթակ բրենդերի համար — ընտրեք ձեզ հարմար փորձը։",
+    "showcase.vista.title": "Vista",
+    "showcase.vista.subtitle": "B2C · AI ինտերիերի դիզայն",
+    "showcase.vista.desc": "Վերբեռնեք սենյակի լուսանկար, ընտրեք իրական կահույք տեղական խանութներից և ստացեք ֆոտորեալիստական AI վերանախագիծ վայրկյանների ընթացքում։",
+    "showcase.vista.feature1": "Սենյակի լուսանկար և AI պլանավորում",
+    "showcase.vista.feature2": "Իրական ապրանքներ տեղական խանութներից",
+    "showcase.vista.feature3": "Արագ և նախագծային ռեժիմներ",
+    "showcase.vista.feature4": "Վճարում դիզայնի համար, առանց բաժանորդագրության",
+    "showcase.vista.cta": "Բացել Vista",
+    "showcase.metric.title": "Metric Platform (Published)",
+    "showcase.metric.subtitle": "B2B · Անալիտիկա և ցուցափեղկ",
+    "showcase.metric.desc": "Վերածեք լուսանկարները 3D մոդելների, գործարկեք պլանավորիչներ և հրապարակված ցուցափեղկ, որտեղ հաճախորդները կարգավորում և պատվիրում են։",
+    "showcase.metric.feature1": "Image-to-3D կատալոգ րոպեներում",
+    "showcase.metric.feature2": "Սենյակի, խոհանոցի և զգեստապահարանի պլանավորիչներ",
+    "showcase.metric.feature3": "Հրապարակված ցուցափեղկ եզակի URL-ով",
+    "showcase.metric.feature4": "Պատվերներ, AI օգնական և մոդուլային կատալոգ",
+    "showcase.metric.cta": "Իմանալ ավելին",
 
     "features.title": "Ամեն ինչ՝ կահույքը 3D-ով վաճառելու համար",
     "features.subtitle": "Լուսանկարից մինչև 3D մոդել և պատվեր — մեկ հարթակ, որը փոխարինում է հինգ գործիքի:",
@@ -387,8 +429,6 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "features.roomPlannersDesc": "Սենյակի, խոհանոցի, զգեստապահարանի և մոդուլների պլանավորիչները թույլ են տալիս հաճախորդներին նախագծել տարածքներ 3D կահույքով։",
     "features.aiChat": "AI օգնական",
     "features.aiChatDesc": "Հաճախորդները նկարագրում են իրենց ցանկությունը՝ «Ավելացրու կապույտ սեղան 120 սմ լայնությամբ», և AI-ն այն ավելացնում է դիզայնին։",
-    "features.photoAssist": "Լուսանկար → սենյակի դիզայն",
-    "features.photoAssistDesc": "Վերբեռնեք սենյակի լուսանկարը, և մեր AI-ը կորոշի չափերը, կահույքի տեղաբաշխումը և կառաջարկի պլանավորումներ։",
     "features.modularCatalog": "Մոդուլային կատալոգ",
     "features.modularCatalogDesc": "Ստեղծեք կարգավորելի մոդուլներ՝ նյութերով, բռնակներով և գնային կանոններով՝ պլանավորիչներում օգտագործելու համար։",
     "features.orders": "Պատվերներ և ցուցափեղկ",
@@ -407,7 +447,7 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "socialProof.title": "Բրենդներ, որոնք ընտրում են մեզ",
 
     "cta.title": "Պատրա՞ստ եք ստեղծել ձեր սեփական կատալոգը",
-    "cta.subtitle": "Բաժանորդագրվեք հիմա, վճարեք 14 օր հետո։ Առաջին գանձումը փորձաշրջանից հետո։ Սահմանաչափերը գործում են փորձաշրջանում, ներառյալ լուսանկարից 3D-ի առաջին ամսվա բոնուսը։",
+    "cta.subtitle": "Օֆորմեք բաժանորդագրություն և անմիջապես ստացեք թարիֆի լիարժեք սահմանաչափերը, ներառյալ լուսանկարից 3D-ի առաջին ամսվա բոնուսը։",
     "cta.getStarted": "Սկսել",
     "cta.contactSales": "Կապ հաստատել",
 
@@ -419,13 +459,13 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "footer.copyright": "© {year} Tunzone. Բոլոր իրավունքները պաշտպանված են:",
 
     "pricing.title": "Պարզ և թափանցիկ գնային քաղաքականություն",
-    "pricing.subtitle": "Բաժանորդագրվեք հիմա, վճարեք 14 օր հետո։ Առաջին գանձումը փորձաշրջանից հետո։ Սահմանաչափերը գործում են փորձաշրջանում, ներառյալ լուսանկարից 3D-ի առաջին ամսվա բոնուսը։",
+    "pricing.subtitle": "Ընտրեք ձեր թարիֆը և սկսեք ստեղծել 3D կատալոգը այսօր։ Ներառյալ լուսանկարից 3D-ի առաջին ամսվա բոնուսը։ Աճեցեք առանց թաքնված միջնորդների։",
     "pricing.comparePlans": "Համեմատել պլանները",
     "pricing.feature": "Հատկանիշ",
     "pricing.scrollHint": "Պորունեք վերև պլանների քարտերը տեսնելու համար:",
     "pricing.monthly": "Ամսական",
     "pricing.annual": "Տարեկան",
-    "pricing.monthFree": "14 օր անվճարdelays",
+    "pricing.monthFree": "Տնտեսություն ~8%",
     "pricing.mostPopular": "Ամենատարածվածը",
     "pricing.perMonth": "/ ամիս",
     "pricing.billedAnnually": "Տարեկան վճարումով",
@@ -445,7 +485,6 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "feature.imageTo3dFirst": "Լուսանկարից 3D (առաջին ամիս)",
     "feature.imageTo3dOngoing": "Լուսանկարից 3D (2-րդ ամսից)",
     "feature.aiChat": "AI օգնական",
-    "feature.photoAssist": "Լուսանկար → սենյակի դիզայն",
     "feature.interiorDesignGen": "AI ինտերիերի դիզայն (գեներացիաներ / ամիս)",
     "feature.priority": "Առաջնահերթ աջակցություն",
     "feature.customDomain": "Սեփական դոմեն",
@@ -474,9 +513,9 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     "faq.q4": "Կարո՞ղ եմ փոխել բաժանորդագրությունը ամսվա մեջտեղում։",
     "faq.a4": "Այո։ Բարձրացման դեպքում նոր պլանը գործում է անմիջապես, և դուք ստանում եք լրացուցիչ կրեդիտների տարբերությունը։ Նվազեցման դեպքում փոփոխությունը ուժի մեջ է մտնում հաջորդ բիլինգի շրջանի սկզբից։",
     "faq.q5": "Ինչպես՞ է աշխատում տարեկան վճարումը",
-    "faq.a5": "Տարեկան պլանները վճարվում են տարեկան մեկ անգամ։ Առաջին ամսվա համար գործում է 14-օրյա անվճար փորձաշրջան։ Փորձաշրջանի ավարտից հետո սկսվում է վճարովի բաժանորդագրությունը։ Տարեկան պլանը հաշվարկվում է ամսական արժեքի հիման վրա՝ 12 ամսվա համար։ Ամսական կրեդիտները տրամադրվում են ամեն ամիս՝ ըստ ձեր պլանի սահմանաչափի։",
-    "faq.q6": "Ինչպե՞ս է աշխատում «Բաժանորդագրվեք հիմա, վճարեք հետո»",
-    "faq.a6": "«Բաժանորդագրվեք հիմա, վճարեք 14 օր հետո»։ Բաժանորդագրությունը սկսվում է գրանցման միջոցով, քարտը պահվում է հետագա գանձման համար, սակայն առաջին վճարումը կատարվում է փորձաշրջանի ավարտից հետո։ Փորձաշրջանի ընթացքում հասանելի են բոլոր քվոտաները, ներառյալ առաջին ամսվա բոնուսը։ Անվճար մշտական մակարդակ չկա․ անհրաժեշտ է ակտիվ փորձաշրջան կամ վճարովի բաժանորդագրություն։",
+    "faq.a5": "Տարեկան պլանները վճարվում են տարեկան մեկ անգամ։ Տարեկան պլանը հաշվարկվում է ամսական արժեքի հիման վրա՝ 12 ամսվա համար։ Ամսական կրեդիտները տրամադրվում են ամեն ամիս՝ ըստ ձեր պլանի սահմանաչափի։",
+    "faq.q6": "Երբ սկսվում է վճարումը՞",
+    "faq.a6": "Բաժանորդագրությունը և վճարումը սկսվում են checkout-ից անմիջապես հետո։ Ռիարժեք սահմանաչափերը անմիջապես, ներառյալ առաջին ամսվա բոնուսը։ Անվճար մշտական մակարդակ չկա․ անհրաժեշտ է ակտիվ բաժանորդագրություն։",
     "faq.q8": "Ինչ՞ վճարման մեթոդներ եք ընդունում",
     "faq.a8": "Մենք ընդունում ենք բոլոր հիմնական վարկային և դեբետային քարտերը (Visa, Mastercard, American Express)։ Enterprise հաճախորդների համար կարող են դիտարկվել նաև վճարման այլ եղանակներ՝ ըստ անհրաժեշտության։",
     "faq.q9": "Կարո՞ղ եմ չեղարկել ցանկացած պահի։",

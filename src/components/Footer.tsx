@@ -19,7 +19,7 @@ export function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer className="border-t border-border/80 bg-card/60 dark:bg-card/40">
+    <footer className="border-t border-border bg-card/60">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
         <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between">
           <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
@@ -31,7 +31,7 @@ export function Footer() {
               unoptimized
               className="h-8 w-8 rounded-lg object-contain"
             />
-            <span aria-label="Tunzone" className="font-extrabold tracking-tight">
+            <span aria-label="Tunzone" className="font-serif italic text-xl font-normal tracking-tight">
               <span className="text-foreground">Tun</span>
               <span className="text-primary">zone</span>
             </span>
@@ -43,7 +43,7 @@ export function Footer() {
                 <a
                   key={l.href}
                   href={l.href}
-                  className="text-sm text-zinc-400 transition-colors hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-300"
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {t(l.key)}
                 </a>
@@ -51,7 +51,7 @@ export function Footer() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="text-sm text-zinc-400 transition-colors hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-300"
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {t(l.key)}
                 </Link>
@@ -61,7 +61,7 @@ export function Footer() {
 
         </div>
 
-        <p className="mt-8 text-center text-xs text-zinc-400 dark:text-zinc-600">
+        <p className="mt-8 text-center text-xs text-muted-foreground">
           {t("footer.copyright").replace("{year}", String(new Date().getFullYear()))}
         </p>
       </div>

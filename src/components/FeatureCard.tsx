@@ -19,9 +19,9 @@ export function FeatureCard({ icon: Icon, title, description, index }: FeatureCa
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       className={cn(
-        "group relative rounded-2xl border p-6 transition-all duration-300",
-        "border-border/80 bg-card hover:border-border hover:bg-secondary/50 hover:shadow-lg hover:shadow-primary/10",
-        "dark:border-border/80 dark:bg-card/60 dark:hover:border-border dark:hover:bg-card",
+        "group relative rounded-[20px] border p-6 transition-all duration-300",
+        "border-border bg-card hover:-translate-y-[3px] hover:border-primary/40 hover:shadow-[0_16px_48px_rgba(60,35,10,0.1)]",
+        "dark:hover:shadow-[0_16px_48px_rgba(0,0,0,0.12)]",
       )}
     >
       <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary-muted text-primary transition-colors group-hover:bg-primary-muted-strong">

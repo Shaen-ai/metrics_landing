@@ -23,7 +23,7 @@ export default function FAQPage() {
       <SectionWrapper className="pt-32">
         <div className="mx-auto max-w-3xl">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            <h1 className="font-serif italic text-4xl font-normal tracking-tight text-foreground sm:text-5xl">
               {t("faq.title")}
             </h1>
             <p className="mt-4 text-muted-foreground">

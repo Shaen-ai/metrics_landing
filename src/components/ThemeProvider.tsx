@@ -1,47 +1,61 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-
-type Theme = "light" | "dark";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import {
+  type Theme,
+  type ThemePreference,
+  persistThemePreference,
+  readStoredThemePreference,
+  resolveTheme,
+} from "@/lib/theme";
 
 const ThemeContext = createContext<{
   theme: Theme;
+  preference: ThemePreference;
   toggle: () => void;
-}>({ theme: "dark", toggle: () => {} });
+}>({ theme: "dark", preference: "auto", toggle: () => {} });
 
 export function useTheme() {
   return useContext(ThemeContext);
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [preference, setPreference] = useState<ThemePreference>("auto");
   const [theme, setTheme] = useState<Theme>("dark");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("theme") as Theme | null;
-    if (stored) {
-      setTheme(stored);
-    } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-      setTheme("light");
-    }
+    const stored = readStoredThemePreference();
+    setPreference(stored);
+    setTheme(resolveTheme(stored));
     setMounted(true);
   }, []);
 
   useEffect(() => {
     if (!mounted) return;
-    const root = document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-    localStorage.setItem("theme", theme);
+    document.documentElement.dataset.theme = theme;
   }, [theme, mounted]);
 
-  const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+  useEffect(() => {
+    if (!mounted || preference !== "auto") return;
+
+    const sync = () => setTheme(resolveTheme("auto"));
+    sync();
+    const id = window.setInterval(sync, 60_000);
+    return () => window.clearInterval(id);
+  }, [preference, mounted]);
+
+  const toggle = useCallback(() => {
+    setTheme((current) => {
+      const next: Theme = current === "dark" ? "light" : "dark";
+      setPreference(next);
+      persistThemePreference(next);
+      return next;
+    });
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggle }}>
+    <ThemeContext.Provider value={{ theme, preference, toggle }}>
       {children}
     </ThemeContext.Provider>
   );
