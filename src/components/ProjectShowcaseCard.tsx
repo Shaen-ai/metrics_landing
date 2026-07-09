@@ -53,7 +53,7 @@ export function ProjectShowcaseCard({
       aria-labelledby={titleId}
     >
       <div className="relative flex flex-1 flex-col p-6 sm:p-8">
-        <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-muted text-primary">
+        <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-muted text-muted-foreground transition-colors duration-300 group-hover:text-primary">
           <Icon size={24} aria-hidden />
         </div>
 
@@ -78,7 +78,7 @@ export function ProjectShowcaseCard({
               className="flex items-start gap-2.5 text-sm text-foreground/85 transition-colors duration-300 group-hover:text-foreground"
             >
               <span
-                className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+                className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-border transition-colors duration-300 group-hover:bg-primary"
                 aria-hidden
               />
               {f}

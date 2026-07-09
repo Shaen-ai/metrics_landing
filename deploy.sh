@@ -27,6 +27,21 @@ rsync -avz --delete \
 
 $SSH "$SERVER" "sudo chown -R '$REMOTE_OWNER' '$REMOTE_DIR'"
 
+# --- PostHog (NEXT_PUBLIC_* must be present on server before build) ----------
+POSTHOG_KEY="$(grep "^NEXT_PUBLIC_POSTHOG_KEY=" "$APP_DIR/.env.local" 2>/dev/null | head -1 | cut -d= -f2-)" || true
+if [ -z "$POSTHOG_KEY" ]; then
+  POSTHOG_KEY="$(grep "^NEXT_PUBLIC_POSTHOG_KEY=" "$APP_DIR/.env.production" 2>/dev/null | head -1 | cut -d= -f2-)" || true
+fi
+if [ -n "$POSTHOG_KEY" ]; then
+  echo "==> Syncing NEXT_PUBLIC_POSTHOG_KEY to remote .env.local ..."
+  $SSH "$SERVER" "cd '$REMOTE_DIR' && touch .env.local && \
+    if grep -q '^NEXT_PUBLIC_POSTHOG_KEY=' .env.local 2>/dev/null; then \
+      sed -i 's|^NEXT_PUBLIC_POSTHOG_KEY=.*|NEXT_PUBLIC_POSTHOG_KEY=${POSTHOG_KEY}|' .env.local; \
+    else \
+      echo 'NEXT_PUBLIC_POSTHOG_KEY=${POSTHOG_KEY}' >> .env.local; \
+    fi"
+fi
+
 echo "==> Installing, building, and restarting PM2 on server..."
 $SSH "$SERVER" "cd '$REMOTE_DIR' \
   && npm ci \

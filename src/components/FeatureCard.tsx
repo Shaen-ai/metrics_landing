@@ -24,7 +24,7 @@ export function FeatureCard({ icon: Icon, title, description, index }: FeatureCa
         "dark:hover:shadow-[0_16px_48px_rgba(0,0,0,0.12)]",
       )}
     >
-      <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary-muted text-primary transition-colors group-hover:bg-primary-muted-strong">
+      <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-muted text-muted-foreground transition-colors group-hover:bg-primary-muted group-hover:text-primary">
         <Icon size={22} />
       </div>
       <h3 className="text-base font-semibold text-foreground">{title}</h3>

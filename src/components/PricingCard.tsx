@@ -7,6 +7,7 @@ import { Button } from "./Button";
 import { useTranslation } from "@/hooks/useTranslation";
 import type { PricingTier, PricingFeature, TierColumnId } from "@/lib/pricing-data";
 import { getBillingStartHref } from "@/lib/checkout-urls";
+import { track } from "@/lib/analytics";
 
 interface PricingCardProps {
   tier: PricingTier;
@@ -34,12 +35,12 @@ export function PricingCard({ tier, features, annual, index }: PricingCardProps)
       className={cn(
         "relative flex flex-col rounded-[20px] border p-5 sm:p-6 lg:row-span-4 lg:grid lg:grid-rows-subgrid lg:p-8",
         tier.popular
-          ? "border-primary/45 bg-primary-muted/50 dark:bg-primary-muted/30"
+          ? "border-foreground/25 bg-muted/60 dark:bg-muted/40"
           : "border-border bg-card",
       )}
     >
       {tier.popular && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1 text-xs font-semibold text-primary-foreground">
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full border border-primary/40 bg-muted px-4 py-1 text-xs font-semibold text-foreground">
           {t("pricing.mostPopular")}
         </div>
       )}
@@ -73,6 +74,7 @@ export function PricingCard({ tier, features, annual, index }: PricingCardProps)
         href={ctaHref}
         sameTab={Boolean(billingHref)}
         className="mb-8 w-full"
+        onClick={() => track("pricing_plan_selected", { plan: tierId, annual })}
       >
         {tp(tier.cta)}
       </Button>
@@ -86,7 +88,7 @@ export function PricingCard({ tier, features, annual, index }: PricingCardProps)
           return (
             <li key={f.label} className="flex items-start gap-3 text-sm">
               {included ? (
-                <Check size={16} className="mt-0.5 shrink-0 text-primary" />
+                <Check size={16} className="mt-0.5 shrink-0 text-muted-foreground" />
               ) : (
                 <X size={16} className="mt-0.5 shrink-0 text-muted-foreground/40" />
               )}

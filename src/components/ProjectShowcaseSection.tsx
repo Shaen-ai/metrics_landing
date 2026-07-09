@@ -53,15 +53,15 @@ export function ProjectShowcaseSection() {
       <motion.div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <motion.div
           style={{ y: blobY1 }}
-          className="absolute -left-32 top-1/4 h-[420px] w-[420px] rounded-full bg-primary/5 blur-3xl dark:bg-primary/8"
+          className="absolute -left-32 top-1/4 h-[420px] w-[420px] rounded-full bg-secondary/25 blur-3xl dark:bg-muted/30"
         />
         <motion.div
           style={{ y: blobY2 }}
-          className="absolute -right-24 top-1/3 h-[380px] w-[380px] rounded-full bg-primary/4 blur-3xl dark:bg-primary/6"
+          className="absolute -right-24 top-1/3 h-[380px] w-[380px] rounded-full bg-muted/30 blur-3xl dark:bg-muted/25"
         />
         <motion.div
           style={{ y: blobY3 }}
-          className="absolute bottom-0 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-primary/4 blur-3xl dark:bg-primary/6"
+          className="absolute bottom-0 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-secondary/20 blur-3xl dark:bg-muted/25"
         />
       </motion.div>
 
@@ -72,7 +72,7 @@ export function ProjectShowcaseSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="text-sm font-medium uppercase tracking-widest text-primary"
+            className="text-sm font-medium uppercase tracking-widest text-muted-foreground"
           >
             {t("showcase.eyebrow")}
           </motion.p>

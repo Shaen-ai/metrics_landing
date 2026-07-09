@@ -30,7 +30,7 @@ export function PricingToggle({ annual, onChange }: PricingToggleProps) {
         className={cn(
           "relative inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded-full border transition-colors duration-200",
           annual
-            ? "border-primary bg-primary"
+            ? "border-primary bg-muted"
             : "border-border bg-muted dark:border-border dark:bg-muted",
         )}
       >

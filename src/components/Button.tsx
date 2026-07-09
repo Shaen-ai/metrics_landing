@@ -14,9 +14,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<Variant, string> = {
   primary:
-    "cd-generate-btn bg-primary text-primary-foreground border border-transparent hover:brightness-110 hover:shadow-[0_8px_24px_rgba(200,98,42,0.3)]",
+    "group/btn bg-muted text-foreground border border-border hover:border-primary hover:bg-secondary [&_svg]:text-muted-foreground hover:[&_svg]:text-primary",
   secondary:
-    "bg-muted text-foreground border border-border hover:border-primary/40 hover:bg-secondary",
+    "group/btn bg-card text-foreground border border-border hover:border-primary/50 hover:bg-muted [&_svg]:text-muted-foreground hover:[&_svg]:text-primary/80",
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -35,6 +35,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         <a
           href={href}
           className={classes}
+          onClick={props.onClick as React.MouseEventHandler<HTMLElement> | undefined}
           {...(newTab
             ? { target: "_blank", rel: "noopener noreferrer" }
             : {})}

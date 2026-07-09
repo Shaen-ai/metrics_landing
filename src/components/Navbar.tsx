@@ -10,6 +10,7 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTranslation } from "@/hooks/useTranslation";
 import { getAppBaseUrl, getStartedHref, getVistaConsumerDesignHref } from "@/lib/appUrl";
 import { cn } from "@/lib/cn";
+import { track } from "@/lib/analytics";
 
 const linkKeys = [
   { key: "nav.home", href: "/" },
@@ -38,9 +39,8 @@ export function Navbar() {
             unoptimized
             className="h-9 w-9 rounded-xl object-contain sm:h-10 sm:w-10"
           />
-          <span aria-label="Tunzone" className="font-serif italic text-2xl font-normal tracking-tight sm:text-[1.6rem]">
-            <span className="text-foreground">Tun</span>
-            <span className="text-primary">zone</span>
+          <span aria-label="Tunzone" className="font-serif italic text-2xl font-normal tracking-tight text-foreground sm:text-[1.6rem]">
+            Tunzone
           </span>
         </Link>
 
@@ -65,7 +65,13 @@ export function Navbar() {
           ) : null}
           <LanguageSwitcher />
           <ThemeToggle />
-          <Button href={getStartedHref()} sameTab className="ml-1 rounded-full px-5 py-2.5">
+          <Button
+            variant="secondary"
+            href={getStartedHref()}
+            sameTab
+            className="ml-1 rounded-full px-5 py-2.5"
+            onClick={() => track("landing_cta_clicked", { cta: "navbar", target: "get_started" })}
+          >
             {t("nav.getStarted")}
           </Button>
         </div>
@@ -111,7 +117,13 @@ export function Navbar() {
               {t("nav.signIn")}
             </a>
           ) : null}
-          <Button href={getStartedHref()} sameTab className="w-full">
+          <Button
+            variant="secondary"
+            href={getStartedHref()}
+            sameTab
+            className="w-full"
+            onClick={() => track("landing_cta_clicked", { cta: "navbar_mobile", target: "get_started" })}
+          >
             {t("nav.getStarted")}
           </Button>
         </div>

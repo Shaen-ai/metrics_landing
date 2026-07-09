@@ -90,10 +90,10 @@ export default function HomePage() {
               transition={{ delay: i * 0.15, duration: 0.5 }}
               className="text-center"
             >
-              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-muted text-primary">
+              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-muted text-muted-foreground">
                 <s.icon size={26} />
               </div>
-              <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-primary">
+              <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 {t("howItWorks.step")} {i + 1}
               </div>
               <h3 className="text-lg font-semibold text-foreground">{t(s.titleKey)}</h3>

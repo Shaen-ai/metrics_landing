@@ -31,9 +31,8 @@ export function Footer() {
               unoptimized
               className="h-8 w-8 rounded-lg object-contain"
             />
-            <span aria-label="Tunzone" className="font-serif italic text-xl font-normal tracking-tight">
-              <span className="text-foreground">Tun</span>
-              <span className="text-primary">zone</span>
+            <span aria-label="Tunzone" className="font-serif italic text-xl font-normal tracking-tight text-foreground">
+              Tunzone
             </span>
           </Link>
 

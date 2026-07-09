@@ -5,6 +5,7 @@ import "./design.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { PostHogProvider } from "@/components/PostHogProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { TranslationProvider } from "@/components/TranslationProvider";
 import { countryFromRequestHeaders, languageFromCookieOrGeo } from "@/lib/requestLanguage";
@@ -93,13 +94,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         className="font-sans antialiased bg-background text-foreground transition-colors duration-300"
       >
         <GoogleAnalytics />
-        <ThemeProvider>
-          <TranslationProvider initialLang={initialLang}>
-            <Navbar />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
-          </TranslationProvider>
-        </ThemeProvider>
+        <PostHogProvider>
+          <ThemeProvider>
+            <TranslationProvider initialLang={initialLang}>
+              <Navbar />
+              <main className="min-h-screen">{children}</main>
+              <Footer />
+            </TranslationProvider>
+          </ThemeProvider>
+        </PostHogProvider>
       </body>
     </html>
   );
