@@ -2,7 +2,13 @@ import type { LanguageCode } from "./translations";
 
 const ARMENIA_COUNTRY = "AM";
 
-/** Country code from common edge / hosting headers (Vercel, Cloudflare, etc.). */
+/**
+ * Country code from common edge / hosting headers.
+ *
+ * Production must forward one of these from Cloudflare or the reverse proxy
+ * (e.g. Cloudflare `CF-IPCountry` → `cf-ipcountry`) so real AM visitors get
+ * Armenian without client-side guessing. Missing headers → English default.
+ */
 export function countryFromRequestHeaders(
   headers: Headers | { get(name: string): string | null },
 ): string | null {
@@ -21,26 +27,10 @@ export function countryFromRequestHeaders(
 
 /**
  * Default language when the user has not chosen one explicitly (no cookie).
- * Armenia → Armenian; everywhere else → English.
+ * Only confident Armenia → Armenian; everywhere else → English.
  */
 export function defaultLanguageFromGeo(countryCode: string | null | undefined): LanguageCode {
   if (countryCode?.toUpperCase() === ARMENIA_COUNTRY) return "hy";
-  return "en";
-}
-
-/**
- * Client fallback when geo headers are unavailable (e.g. local dev).
- */
-export function defaultLanguageFromClientHints(): LanguageCode {
-  if (typeof window === "undefined") return "en";
-  try {
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    if (tz === "Asia/Yerevan") return "hy";
-  } catch {
-    /* ignore */
-  }
-  const nav = (navigator.language ?? "").toLowerCase();
-  if (nav.startsWith("hy")) return "hy";
   return "en";
 }
 

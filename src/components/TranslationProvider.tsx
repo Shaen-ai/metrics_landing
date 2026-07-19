@@ -9,7 +9,6 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { defaultLanguageFromClientHints } from "@/lib/requestLanguage";
 import {
   getTranslation,
   translatePricing,
@@ -68,8 +67,7 @@ export function TranslationProvider({
 
     clearLegacyLanguageStorage();
 
-    const inferred = defaultLanguageFromClientHints();
-    setLang(inferred);
+    setLang(initialLang);
   }, [initialLang]);
 
   const changeLang = useCallback((code: LanguageCode) => {
