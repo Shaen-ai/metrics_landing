@@ -78,6 +78,30 @@ export default function AboutPage() {
         </div>
       </SectionWrapper>
 
+      {/* Vista & Studio */}
+      <SectionWrapper className="border-t border-border/50 dark:border-border/40">
+        <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-2">
+          <motion.div
+            initial={false}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-lg font-semibold text-foreground">{t("about.vista.title")}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t("about.vista.desc")}</p>
+          </motion.div>
+          <motion.div
+            initial={false}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.08 }}
+          >
+            <h2 className="text-lg font-semibold text-foreground">{t("about.platform.title")}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t("about.platform.desc")}</p>
+          </motion.div>
+        </div>
+      </SectionWrapper>
+
       {/* Mission + values */}
       <SectionWrapper className="border-t border-border/50 dark:border-border/40">
         <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-3">

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Tunzone 3D furniture platform";
+export const alt = "Tunzone — Vista AI interior design & Studio";
 export const size = {
   width: 1200,
   height: 630,
@@ -63,7 +63,7 @@ export default function Image() {
               letterSpacing: "-0.06em",
             }}
           >
-            3D furniture sales platform
+            Vista & Studio
           </div>
           <div
             style={{
@@ -73,8 +73,8 @@ export default function Image() {
               lineHeight: 1.35,
             }}
           >
-            Transform product photos into 3D models, build immersive room planners,
-            and sell modular furniture online.
+            Vista: token-based AI interior design. Studio: subscription 3D catalogs,
+            planners, and storefronts for furniture brands.
           </div>
         </div>
 

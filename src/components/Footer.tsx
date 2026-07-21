@@ -3,12 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { mailtoSupportHref } from "@/lib/contact";
+import { getStudioHref, getVistaConsumerDesignHref } from "@/lib/appUrl";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const contactHref = mailtoSupportHref();
 
 const linkKeys = [
   { key: "footer.home", href: "/" },
+  { key: "footer.vista", href: getVistaConsumerDesignHref() },
+  { key: "footer.platform", href: getStudioHref() },
   { key: "footer.pricing", href: "/pricing" },
   { key: "footer.faq", href: "/faq" },
   { key: "footer.about", href: "/about" },
@@ -37,25 +40,21 @@ export function Footer() {
           </Link>
 
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 sm:gap-x-6">
-            {linkKeys.map((l) =>
-              l.href.startsWith("mailto:") ? (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {t(l.key)}
-                </a>
-              ) : (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                >
+            {linkKeys.map((l) => {
+              const className = "text-sm text-muted-foreground transition-colors hover:text-foreground";
+              if (l.href.startsWith("mailto:") || l.href.startsWith("http")) {
+                return (
+                  <a key={l.key} href={l.href} className={className}>
+                    {t(l.key)}
+                  </a>
+                );
+              }
+              return (
+                <Link key={l.key} href={l.href} className={className}>
                   {t(l.key)}
                 </Link>
-              ),
-            )}
+              );
+            })}
           </div>
 
         </div>

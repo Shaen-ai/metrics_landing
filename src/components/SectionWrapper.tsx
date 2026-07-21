@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/cn";
+import { fadeUpInitial, fadeUpVisible, motionTransition, usePrefersReducedMotion } from "@/lib/motion";
 
 interface SectionWrapperProps {
   children: React.ReactNode;
@@ -10,13 +11,15 @@ interface SectionWrapperProps {
 }
 
 export function SectionWrapper({ children, className, id }: SectionWrapperProps) {
+  const reduceMotion = usePrefersReducedMotion();
+
   return (
     <motion.section
       id={id}
-      initial={false}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={fadeUpInitial(reduceMotion)}
+      whileInView={fadeUpVisible}
       viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={motionTransition(0, 0.6)}
       className={cn("mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24", className)}
     >
       {children}

@@ -16,9 +16,9 @@ const GOOGLE_FONTS_URL =
   "https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..600;1,300..600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+Armenian:wght@300;400;500;600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&display=swap";
 
 const siteUrl = "https://tunzone.com";
-const title = "Tunzone — 3D Furniture Platform";
+const title = "Tunzone — Vista & Studio";
 const description =
-  "Transform product photos into 3D models, build immersive room planners, and sell modular furniture online.";
+  "Vista brings AI interior design to homeowners with token-based pricing. Studio helps furniture brands turn photos into 3D catalogs, planners, and storefronts.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Tunzone 3D furniture platform",
+        alt: "Tunzone — Vista and Studio",
       },
     ],
   },

@@ -1,6 +1,19 @@
 import { CONTACT_SUPPORT_EMAIL } from "./contact";
 
-/* ── B2C consumer credit packages ─────────────────────────────────────── */
+/* ── Vista token pricing (aligned with vista/src/lib/vistaTokens.ts) ─────── */
+
+export const vistaTokenPricing = {
+  usdPerToken: 0.1,
+  amdPerToken: 40,
+  anonymousGrant: 20,
+  costs: {
+    generate: 10,
+    regenerate: 5,
+    edit: 3,
+  },
+} as const;
+
+/* ── B2C consumer credit packages (legacy — not used on pricing page) ── */
 
 export interface ConsumerCreditPackage {
   id: string;

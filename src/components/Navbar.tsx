@@ -8,19 +8,18 @@ import { Button } from "./Button";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTranslation } from "@/hooks/useTranslation";
-import { getAppBaseUrl, getStartedHref, getVistaConsumerDesignHref } from "@/lib/appUrl";
+import { getStartedHref, getStudioHref, getVistaConsumerDesignHref } from "@/lib/appUrl";
 import { cn } from "@/lib/cn";
 import { track } from "@/lib/analytics";
 
 const linkKeys = [
   { key: "nav.home", href: "/" },
   { key: "nav.aiDesign", href: getVistaConsumerDesignHref() },
+  { key: "nav.platform", href: getStudioHref() },
   { key: "nav.pricing", href: "/pricing" },
   { key: "nav.faq", href: "/faq" },
   { key: "nav.about", href: "/about" },
 ];
-
-const appBase = getAppBaseUrl();
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -33,36 +32,34 @@ export function Navbar() {
           <Image
             src="/logo.png"
             alt="Tunzone logo"
-            width={40}
-            height={40}
+            width={56}
+            height={56}
             priority
             unoptimized
-            className="h-9 w-9 rounded-xl object-contain sm:h-10 sm:w-10"
+            className="h-12 w-12 rounded-xl object-contain sm:h-14 sm:w-14"
           />
-          <span aria-label="Tunzone" className="font-serif italic text-2xl font-normal tracking-tight text-foreground sm:text-[1.6rem]">
+          <span aria-label="Tunzone" className="font-serif italic text-3xl font-normal tracking-tight text-foreground sm:text-[1.85rem]">
             Tunzone
           </span>
         </Link>
 
         {/* Desktop */}
         <div className="hidden items-center gap-8 md:flex">
-          {linkKeys.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {t(l.key)}
-            </Link>
-          ))}
-          {appBase ? (
-            <a
-              href={`${appBase}/login`}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {t("nav.signIn")}
-            </a>
-          ) : null}
+          {linkKeys.map((l) => {
+            const className = "text-sm text-muted-foreground transition-colors hover:text-foreground";
+            if (l.href.startsWith("http")) {
+              return (
+                <a key={l.key} href={l.href} className={className}>
+                  {t(l.key)}
+                </a>
+              );
+            }
+            return (
+              <Link key={l.key} href={l.href} className={className}>
+                {t(l.key)}
+              </Link>
+            );
+          })}
           <LanguageSwitcher />
           <ThemeToggle />
           <Button
@@ -98,25 +95,32 @@ export function Navbar() {
         )}
       >
         <div className="flex flex-col gap-2 px-4 pb-5 sm:px-6 sm:pb-6">
-          {linkKeys.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-          >
-            {t(l.key)}
-          </Link>
-          ))}
-          {appBase ? (
-            <a
-              href={`${appBase}/login`}
-              onClick={() => setOpen(false)}
-              className="mt-2 rounded-lg border-t border-border/80 px-2 pt-4 pb-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-            >
-              {t("nav.signIn")}
-            </a>
-          ) : null}
+          {linkKeys.map((l) => {
+            const className =
+              "rounded-lg px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground";
+            if (l.href.startsWith("http")) {
+              return (
+                <a
+                  key={l.key}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className={className}
+                >
+                  {t(l.key)}
+                </a>
+              );
+            }
+            return (
+              <Link
+                key={l.key}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className={className}
+              >
+                {t(l.key)}
+              </Link>
+            );
+          })}
           <Button
             variant="secondary"
             href={getStartedHref()}

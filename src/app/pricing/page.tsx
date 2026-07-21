@@ -4,110 +4,64 @@ import { useState } from "react";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { PricingCard } from "@/components/PricingCard";
 import { PricingToggle } from "@/components/PricingToggle";
-import { tiers, features, TIER_COLUMN_IDS } from "@/lib/pricing-data";
-import { Check, X } from "lucide-react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/cn";
+import { PricingProductChooser } from "@/components/PricingProductChooser";
+import { VistaPricingSection } from "@/components/VistaPricingSection";
+import { tiers, features } from "@/lib/pricing-data";
 import { useTranslation } from "@/hooks/useTranslation";
 
 export default function PricingPage() {
   const [annual, setAnnual] = useState(false);
-  const { t, tp } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <>
-      {/* Hero */}
       <SectionWrapper className="pt-24 text-center sm:pt-32">
         <h1 className="font-serif italic text-4xl font-normal tracking-tight text-foreground sm:text-5xl">
-          {t("pricing.title")}
+          {t("pricing.umbrella.title")}
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-          {t("pricing.subtitle")}
+          {t("pricing.umbrella.subtitle")}
         </p>
-        <div className="mt-8">
-          <PricingToggle annual={annual} onChange={setAnnual} />
-        </div>
       </SectionWrapper>
 
-      {/* Cards */}
-      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-8">
-        <div className="grid gap-4 sm:gap-6 lg:grid-cols-4 lg:gap-y-0">
-          {tiers.map((tier, i) => (
-            <PricingCard
-              key={tier.id}
-              tier={tier}
-              features={features}
-              annual={annual}
-              index={i}
-            />
-          ))}
+      <PricingProductChooser />
+
+      <VistaPricingSection />
+
+      <section id="studio" className="scroll-mt-24">
+        <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
+              <span className="inline-flex items-center rounded-full border border-border bg-secondary/70 px-3 py-1 text-xs font-medium uppercase tracking-widest text-muted-foreground dark:bg-secondary/30">
+                {t("product.studio.audience")}
+              </span>
+              <span className="inline-flex items-center rounded-full border border-border bg-secondary/70 px-3 py-1 text-xs font-medium uppercase tracking-widest text-muted-foreground dark:bg-secondary/30">
+                {t("pricing.chooser.studioPayment")}
+              </span>
+            </div>
+            <h2 className="mt-3 font-serif italic text-3xl font-normal tracking-tight text-foreground sm:text-4xl">
+              {t("pricing.platform.title")}
+            </h2>
+          </div>
+          <div className="mt-8 flex justify-center">
+            <PricingToggle annual={annual} onChange={setAnnual} />
+          </div>
+        </div>
+
+        <div className="mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 sm:pb-24 lg:px-8">
+          <div className="grid gap-4 sm:gap-6 lg:grid-cols-4 lg:gap-y-0">
+            {tiers.map((tier, i) => (
+              <PricingCard
+                key={tier.id}
+                tier={tier}
+                features={features}
+                annual={annual}
+                index={i}
+              />
+            ))}
+          </div>
         </div>
       </section>
-
-      {/* Comparison table (desktop) */}
-      <SectionWrapper className="border-t border-border/50 dark:border-border/40">
-        <h2 className="mb-8 text-center text-2xl font-bold text-foreground sm:mb-12 sm:text-3xl">
-          {t("pricing.comparePlans")}
-        </h2>
-
-        <div className="hidden overflow-x-auto lg:block">
-          <table className="w-full text-left text-sm">
-            <thead>
-              <tr className="border-b border-border">
-                <th className="pb-4 pr-6 font-medium text-muted-foreground">{t("pricing.feature")}</th>
-                {tiers.map((tier) => (
-                  <th
-                    key={tier.id}
-                    className={cn(
-                      "pb-4 text-center font-semibold",
-                      tier.popular ? "text-primary" : "text-foreground",
-                    )}
-                  >
-                    {tier.name}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {features.map((f, fi) => (
-                <motion.tr
-                  key={f.label}
-                  initial={false}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: fi * 0.03 }}
-                  className="border-b border-border/60 dark:border-border/50"
-                >
-                  <td className="py-4 pr-6 text-secondary-foreground/90 dark:text-foreground/85">{tp(f.label)}</td>
-                  {TIER_COLUMN_IDS.map((tid) => {
-                      const val = f[tid];
-                      return (
-                        <td key={tid} className="py-4 text-center">
-                          {typeof val === "boolean" ? (
-                            val ? (
-                              <Check
-                                size={16}
-                                className="mx-auto text-primary"
-                              />
-                            ) : (
-                              <X size={16} className="mx-auto text-muted-foreground/40" />
-                            )
-                          ) : (
-                            <span className="text-foreground/90">{tp(val)}</span>
-                          )}
-                        </td>
-                      );
-                  })}
-                </motion.tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <p className="mt-6 text-center text-sm text-muted-foreground lg:hidden">
-          {t("pricing.scrollHint")}
-        </p>
-      </SectionWrapper>
     </>
   );
 }

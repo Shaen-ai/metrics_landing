@@ -5,8 +5,7 @@ import { ProjectShowcaseSection } from "@/components/ProjectShowcaseSection";
 import { SectionWrapper } from "@/components/SectionWrapper";
 import { FeatureCard } from "@/components/FeatureCard";
 import { Button } from "@/components/Button";
-import { mailtoSupportHref } from "@/lib/contact";
-import { getStartedHref } from "@/lib/appUrl";
+import { getStudioHref, getVistaConsumerDesignHref } from "@/lib/appUrl";
 import { useTranslation } from "@/hooks/useTranslation";
 import { motion } from "framer-motion";
 import {
@@ -21,6 +20,7 @@ import {
   Move3D,
   ArrowRight,
 } from "lucide-react";
+import { fadeUpInitial, fadeUpVisible, motionTransition, usePrefersReducedMotion } from "@/lib/motion";
 
 const featureKeys = [
   { icon: ImageIcon, titleKey: "features.imageTo3d", descKey: "features.imageTo3dDesc" },
@@ -37,18 +37,29 @@ const stepKeys = [
   { icon: Move3D, titleKey: "howItWorks.design", descKey: "howItWorks.designDesc" },
 ];
 
+const trustedBrands = [
+  {
+    name: "Տախտակ Furniture",
+    href: "https://www.facebook.com/profile.php?id=100054580504950",
+  },
+] as const;
+
 export default function HomePage() {
   const { t } = useTranslation();
+  const reduceMotion = usePrefersReducedMotion();
 
   return (
     <>
       <HeroSection />
       <ProjectShowcaseSection />
 
-      {/* Features */}
+      {/* Features — Platform */}
       <SectionWrapper id="features">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-serif italic text-3xl font-normal tracking-tight text-foreground sm:text-4xl">
+          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+            {t("features.platform.eyebrow")}
+          </p>
+          <h2 className="mt-3 font-serif italic text-3xl font-normal tracking-tight text-foreground sm:text-4xl">
             {t("features.title")}
           </h2>
           <p className="mt-4 text-muted-foreground">
@@ -84,15 +95,19 @@ export default function HomePage() {
           {stepKeys.map((s, i) => (
             <motion.div
               key={s.titleKey}
-              initial={false}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={fadeUpInitial(reduceMotion)}
+              whileInView={fadeUpVisible}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.5 }}
+              transition={motionTransition(i * 0.12, 0.5)}
               className="text-center"
             >
-              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-muted text-muted-foreground">
+              <motion.div
+                whileHover={reduceMotion ? undefined : { scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+                className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-muted text-muted-foreground"
+              >
                 <s.icon size={26} />
-              </div>
+              </motion.div>
               <div className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 {t("howItWorks.step")} {i + 1}
               </div>
@@ -110,12 +125,16 @@ export default function HomePage() {
             {t("socialProof.title")}
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:mt-10 sm:gap-x-12 sm:gap-y-6">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <div
-                key={i}
-                className="h-8 w-24 rounded bg-muted dark:bg-muted/50"
-                title="Logo placeholder"
-              />
+            {trustedBrands.map((brand) => (
+              <a
+                key={brand.href}
+                href={brand.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-base font-semibold tracking-tight text-foreground/80 transition-colors hover:text-primary"
+              >
+                {brand.name}
+              </a>
             ))}
           </div>
         </div>
@@ -123,20 +142,20 @@ export default function HomePage() {
 
       {/* CTA Banner */}
       <SectionWrapper>
-        <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-6 text-center sm:p-16">
+        <div className="cd-cta-shimmer relative overflow-hidden rounded-3xl border border-border bg-card p-6 text-center sm:p-16">
           <h2 className="font-serif italic text-3xl font-normal tracking-tight text-foreground sm:text-4xl">
-            {t("cta.title")}
+            {t("cta.dual.title")}
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            {t("cta.subtitle")}
+            {t("cta.dual.subtitle")}
           </p>
           <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
-            <Button href={getStartedHref()} sameTab className="w-full sm:w-auto">
-              {t("cta.getStarted")}
+            <Button href={getVistaConsumerDesignHref()} sameTab className="w-full sm:w-auto">
+              {t("cta.dual.vista")}
               <ArrowRight size={16} />
             </Button>
-            <Button variant="secondary" href={mailtoSupportHref("Sales inquiry")} className="w-full sm:w-auto">
-              {t("cta.contactSales")}
+            <Button variant="secondary" href={getStudioHref()} sameTab className="w-full sm:w-auto">
+              {t("cta.dual.platform")}
             </Button>
           </div>
         </div>

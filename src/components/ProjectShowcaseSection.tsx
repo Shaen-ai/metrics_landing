@@ -36,11 +36,11 @@ export function ProjectShowcaseSection() {
     t("showcase.vista.feature4"),
   ];
 
-  const metricFeatures = [
-    t("showcase.metric.feature1"),
-    t("showcase.metric.feature2"),
-    t("showcase.metric.feature3"),
-    t("showcase.metric.feature4"),
+  const platformFeatures = [
+    t("showcase.platform.feature1"),
+    t("showcase.platform.feature2"),
+    t("showcase.platform.feature3"),
+    t("showcase.platform.feature4"),
   ];
 
   return (
@@ -99,11 +99,13 @@ export function ProjectShowcaseSection() {
 
         <motion.div
           initial={false}
-          className="mt-10 grid grid-cols-1 gap-6 lg:mt-16 lg:grid-cols-2 lg:gap-8 lg:items-stretch"
+          className="mt-10 grid grid-cols-1 gap-6 lg:mt-16 lg:grid-cols-12 lg:gap-8 lg:items-stretch"
         >
           <ProjectShowcaseCard
             id="vista"
             index={0}
+            featured
+            className="lg:col-span-7"
             title={t("showcase.vista.title")}
             subtitle={t("showcase.vista.subtitle")}
             description={t("showcase.vista.desc")}
@@ -114,14 +116,15 @@ export function ProjectShowcaseSection() {
             icon={Sparkles}
           />
           <ProjectShowcaseCard
-            id="metric"
+            id="studio"
             index={1}
-            title={t("showcase.metric.title")}
-            subtitle={t("showcase.metric.subtitle")}
-            description={t("showcase.metric.desc")}
-            features={metricFeatures}
-            ctaLabel={t("showcase.metric.cta")}
-            ctaHref="#features"
+            className="lg:col-span-5"
+            title={t("showcase.platform.title")}
+            subtitle={t("showcase.platform.subtitle")}
+            description={t("showcase.platform.desc")}
+            features={platformFeatures}
+            ctaLabel={t("showcase.platform.cta")}
+            ctaHref="/pricing#studio"
             icon={BarChart3}
           />
         </motion.div>

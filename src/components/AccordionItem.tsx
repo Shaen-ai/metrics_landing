@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { MOTION_EASE } from "@/lib/motion";
 
 interface AccordionItemProps {
   question: string;
@@ -33,10 +34,10 @@ export function AccordionItem({ question, answer, defaultOpen = false }: Accordi
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
-            initial={false}
+            initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
+            transition={{ duration: 0.25, ease: MOTION_EASE }}
             className="overflow-hidden"
           >
             <p className="pb-5 text-sm leading-relaxed text-muted-foreground">
