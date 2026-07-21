@@ -11,11 +11,14 @@ import { TranslationProvider } from "@/components/TranslationProvider";
 import { countryFromRequestHeaders, languageFromCookieOrGeo } from "@/lib/requestLanguage";
 import type { LanguageCode } from "@/lib/translations";
 import { themeBootScript } from "@/lib/theme";
+import { JsonLdScript } from "@/components/JsonLdScript";
+import { buildPlatformGraphJsonLd } from "@/lib/jsonLd";
+import { TUNZONE_SITE_URL } from "@/lib/siteUrl";
 
 const GOOGLE_FONTS_URL =
   "https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..600;1,300..600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+Armenian:wght@300;400;500;600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&display=swap";
 
-const siteUrl = "https://tunzone.com";
+const siteUrl = TUNZONE_SITE_URL;
 const title = "Tunzone — Vista & Studio";
 const description =
   "Vista brings AI interior design to homeowners with token-based pricing. Studio helps furniture brands turn photos into 3D catalogs, planners, and storefronts.";
@@ -88,6 +91,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             __html: themeBootScript,
           }}
         />
+        <JsonLdScript data={buildPlatformGraphJsonLd()} />
       </head>
       <body
         suppressHydrationWarning
