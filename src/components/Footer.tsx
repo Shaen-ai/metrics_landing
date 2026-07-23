@@ -10,6 +10,8 @@ const contactHref = mailtoSupportHref();
 
 const linkKeys = [
   { key: "footer.home", href: "/" },
+  { key: "footer.vistaPage", href: "/vista" },
+  { key: "footer.studioPage", href: "/studio" },
   { key: "footer.vista", href: getVistaConsumerDesignHref() },
   { key: "footer.platform", href: getStudioHref() },
   { key: "footer.pricing", href: "/pricing" },

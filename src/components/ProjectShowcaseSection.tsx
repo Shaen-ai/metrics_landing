@@ -113,6 +113,8 @@ export function ProjectShowcaseSection() {
             ctaLabel={t("showcase.vista.cta")}
             ctaHref={getVistaConsumerDesignHref()}
             ctaSameTab
+            secondaryHref="/vista"
+            secondaryLabel={t("showcase.learnMore")}
             icon={Sparkles}
           />
           <ProjectShowcaseCard
@@ -125,6 +127,8 @@ export function ProjectShowcaseSection() {
             features={platformFeatures}
             ctaLabel={t("showcase.platform.cta")}
             ctaHref="/pricing#studio"
+            secondaryHref="/studio"
+            secondaryLabel={t("showcase.learnMore")}
             icon={BarChart3}
           />
         </motion.div>

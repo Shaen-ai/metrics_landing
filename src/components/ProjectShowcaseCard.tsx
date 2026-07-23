@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight } from "lucide-react";
@@ -16,6 +17,9 @@ export interface ProjectShowcaseCardProps {
   ctaLabel: string;
   ctaHref: string;
   ctaSameTab?: boolean;
+  /** Optional on-site "Learn more" link (e.g. /vista, /studio) for SEO + deeper info. */
+  secondaryHref?: string;
+  secondaryLabel?: string;
   icon: LucideIcon;
   index: number;
   featured?: boolean;
@@ -31,6 +35,8 @@ export function ProjectShowcaseCard({
   ctaLabel,
   ctaHref,
   ctaSameTab = false,
+  secondaryHref,
+  secondaryLabel,
   icon: Icon,
   index,
   featured = false,
@@ -109,7 +115,7 @@ export function ProjectShowcaseCard({
           ))}
         </ul>
 
-        <div className="mt-auto pt-8">
+        <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-8">
           <Button
             href={ctaHref}
             sameTab={ctaSameTab}
@@ -118,6 +124,15 @@ export function ProjectShowcaseCard({
             {ctaLabel}
             <ArrowRight size={16} />
           </Button>
+          {secondaryHref && secondaryLabel ? (
+            <Link
+              href={secondaryHref}
+              className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            >
+              {secondaryLabel}
+              <ArrowRight size={14} />
+            </Link>
+          ) : null}
         </div>
       </div>
     </motion.article>

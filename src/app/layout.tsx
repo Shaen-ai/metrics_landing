@@ -19,9 +19,9 @@ const GOOGLE_FONTS_URL =
   "https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..600;1,300..600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+Armenian:wght@300;400;500;600;700&family=Noto+Sans+Armenian:wght@400;500;600;700&display=swap";
 
 const siteUrl = TUNZONE_SITE_URL;
-const title = "Tunzone — Vista & Studio";
+const title = "Tunzone — Interior Design & 3D Furniture Platform";
 const description =
-  "Vista brings AI interior design to homeowners with token-based pricing. Studio helps furniture brands turn photos into 3D catalogs, planners, and storefronts.";
+  "Tunzone is a multi-product platform. Vista brings AI interior design to homeowners with token-based pricing. Studio helps furniture brands turn photos into 3D catalogs, planners, and storefronts.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Tunzone — Vista and Studio",
+        alt: "Tunzone — Interior design (Vista) and 3D furniture platform (Studio)",
       },
     ],
   },
